@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelixHealth — Diagnostic Solutions for Health Networks</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2212%22 fill=%22%230a4f6e%22/><text y=%22.9em%22 font-size=%2268%22 x=%2210%22 fill=%22white%22 font-weight=%22bold%22>H</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<!--MERKURY TAG START. PLACE AT START OF DOCUMENT HEAD. DO NOT CHANGE-->
+<script type="text/javascript">
+window._svq = window._svq || [];
+window._svq.push(['_trackPageView']);
+(function(d,c){
+  var sv=d.createElement(c); sv.type='text/javascript'; sv.async=true;
+  sv.src='data:text/javascript,/* Merkury sv.js stub */';
+  var s=d.getElementsByTagName(c)[0]; s.parentNode.insertBefore(sv,s);
+})(document,'script');
+</script>
+<!--MERKURY TAG END. DO NOT CHANGE-->
+
+<style>
+:root {
+  --hx-navy:    #071e34;
+  --hx-teal:    #0a6e8a;
+  --hx-teal-l:  #0fa8cc;
+  --hx-sky:     #e8f4f8;
+  --hx-green:   #0d9e6e;
+  --hx-white:   #ffffff;
+  --hx-off:     #f4f7fa;
+  --hx-border:  #d0dde6;
+  --hx-text:    #071e34;
+  --hx-text2:   #3a5068;
+  --hx-text3:   #7a9ab0;
+  --merkury-teal:#00c2b8;
+  --merkury-navy:#0f1e32;
+  --aep-blue:   #1473e6;
+  --ajo-purple: #6e4eda;
+  --mk-orange:  #f76a1a;
+  --font:'DM Sans',-apple-system,sans-serif;
+  --font-serif:'DM Serif Display',Georgia,serif;
+  --mw:1200px; --g:48px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-font-smoothing:antialiased;}
+body{font-family:var(--font);color:var(--hx-text);background:var(--hx-white);line-height:1.5;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;cursor:pointer;}
+button{font-family:var(--font);cursor:pointer;border:0;background:none;}
+.w{max-width:var(--mw);margin:0 auto;padding:0 var(--g);}
+.view{display:none;} .view.active{display:block;}
+
+/* ── NAV ──────────────────────────────────────────────── */
+.nav{position:sticky;top:0;z-index:800;background:var(--hx-white);border-bottom:1px solid var(--hx-border);box-shadow:0 1px 0 var(--hx-border);}
+.nav-top{display:flex;align-items:center;justify-content:space-between;padding:10px var(--g);max-width:var(--mw);margin:0 auto;border-bottom:1px solid var(--hx-border);}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.nav-logo-mark{width:30px;height:30px;background:var(--hx-teal);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+.nav-logo-mark svg{width:17px;height:17px;}
+.nav-logo-name{font-size:17px;font-weight:700;color:var(--hx-navy);letter-spacing:-0.3px;}
+.nav-logo-name span{color:var(--hx-teal);}
+.nav-top-right{display:flex;align-items:center;gap:16px;}
+.nav-top-right a{font-size:13px;font-weight:600;color:var(--hx-text2);}
+.nav-main{display:flex;align-items:center;justify-content:space-between;max-width:var(--mw);margin:0 auto;padding:0 var(--g);}
+.nav-links{display:flex;align-items:center;}
+.nav-links a{font-size:13px;font-weight:600;color:var(--hx-text2);padding:0 14px;height:44px;display:flex;align-items:center;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;}
+.nav-links a:hover{color:var(--hx-navy);border-bottom-color:var(--hx-teal);}
+.nav-cta{background:var(--hx-teal);color:#fff;padding:9px 20px;border-radius:4px;font-size:13px;font-weight:700;transition:background .15s;cursor:pointer;white-space:nowrap;}
+.nav-cta:hover{background:var(--hx-teal-l);}
+
+
+/* ── PRESENTER CONTROL BAR ───────────────────────────── */
+.presenter-bar{background:#0a1628;border-bottom:1px solid rgba(0,194,184,.2);padding:8px 0;}
+.presenter-bar-inner{max-width:var(--mw);margin:0 auto;padding:0 var(--g);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.presenter-bar-left{display:flex;align-items:center;gap:10px;}
+.pbar-dot{width:7px;height:7px;border-radius:50%;background:var(--merkury-teal);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0;}
+.pbar-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--merkury-teal);}
+.pbar-sub{font-size:10px;color:rgba(255,255,255,.3);margin-left:4px;}
+.presenter-bar-right{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.pbar-persona-label{font-size:10px;color:rgba(255,255,255,.4);font-weight:600;margin-right:2px;white-space:nowrap;}
+.pbar-btn{font-family:var(--font);font-size:11px;font-weight:700;padding:5px 12px;border-radius:4px;cursor:pointer;border:1.5px solid;transition:all .15s;letter-spacing:.3px;}
+.pbar-btn-anon{background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.15);}
+.pbar-btn-anon:hover{background:rgba(255,255,255,.12);color:#fff;}
+.pbar-btn-prospect{background:rgba(10,110,138,.2);color:var(--hx-teal-l);border-color:rgba(10,110,138,.4);}
+.pbar-btn-prospect:hover{background:rgba(10,110,138,.35);color:#fff;}
+.pbar-btn-unauth{background:rgba(232,97,26,.15);color:#f0a070;border-color:rgba(232,97,26,.3);}
+.pbar-btn-unauth:hover{background:rgba(232,97,26,.3);color:#fff;}
+.pbar-btn-auth{background:rgba(13,158,110,.15);color:#2dd4a0;border-color:rgba(13,158,110,.3);}
+.pbar-btn-auth:hover{background:rgba(13,158,110,.3);color:#fff;}
+
+/* ── IDENTITY SAMPLE SIDEBAR ─────────────────────────── */
+#id-sample-btn{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:8500;background:var(--merkury-navy);color:var(--merkury-teal);border:1px solid rgba(0,194,184,.3);border-left:none;border-radius:0 6px 6px 0;padding:14px 8px;writing-mode:vertical-rl;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s;box-shadow:2px 0 12px rgba(0,0,0,.2);}
+#id-sample-btn:hover{background:#1a2f48;}
+.isb-dot{width:7px;height:7px;border-radius:50%;background:var(--merkury-teal);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+#id-panel{position:fixed;left:-340px;top:0;width:320px;height:100vh;background:#fff;z-index:8600;box-shadow:8px 0 40px rgba(0,0,0,.18);transition:left .3s cubic-bezier(.25,.8,.25,1);overflow-y:auto;display:flex;flex-direction:column;}
+#id-panel.open{left:0;}
+.idp-header{background:var(--merkury-navy);padding:16px 18px 12px;flex-shrink:0;}
+.idp-header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;}
+.idp-title{font-size:13px;font-weight:700;color:#fff;}
+.idp-close{font-size:20px;color:rgba(255,255,255,.5);cursor:pointer;line-height:1;padding:0 2px;}
+.idp-close:hover{color:#fff;}
+.idp-sub{font-size:10px;color:rgba(255,255,255,.4);}
+.idp-body{padding:14px 16px;flex:1;}
+.idp-empty{font-size:13px;color:var(--hx-text3);line-height:1.6;padding:8px 0;}
+.idp-card{background:var(--hx-off);border-radius:6px;padding:11px 13px;border-left:3px solid var(--merkury-teal);margin-bottom:10px;}
+.idp-card-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--merkury-teal);margin-bottom:8px;}
+.idp-card.firmographic{border-left-color:#6a3aaa;} .idp-card.firmographic .idp-card-title{color:#6a3aaa;}
+.idp-card.intent{border-left-color:var(--hx-green);} .idp-card.intent .idp-card-title{color:var(--hx-green);}
+.idp-card.company{border-left-color:var(--aep-blue);} .idp-card.company .idp-card-title{color:var(--aep-blue);}
+.idp-signal{display:flex;align-items:baseline;gap:4px;margin-bottom:4px;font-family:'Menlo','Monaco','Courier New',monospace;}
+.idp-key{color:#5588dd;font-size:10px;font-weight:600;flex-shrink:0;}
+.idp-colon{color:rgba(0,0,0,.3);font-size:10px;margin:0 2px;}
+.idp-val-str{color:#1a7a3a;font-size:10px;font-weight:500;}
+.idp-val-num{color:#b06010;font-size:10px;font-weight:500;}
+.idp-val-null{color:#aaa;font-size:10px;font-style:italic;}
+.idp-obf{font-size:9px;color:#bbb;margin-left:5px;font-style:italic;font-family:var(--font);}
+.idp-resolve-bar{display:flex;align-items:center;gap:8px;padding:9px 16px;background:var(--merkury-navy);border-top:1px solid rgba(255,255,255,.08);flex-shrink:0;}
+.idp-resolve-dot{width:6px;height:6px;border-radius:50%;background:var(--merkury-teal);}
+.idp-resolve-text{font-size:10px;color:rgba(255,255,255,.5);font-family:'Menlo',monospace;}
+.idp-resolve-ms{color:var(--merkury-teal);font-weight:700;}
+
+/* ── VIEW 1 — HOME PAGE ──────────────────────────────── */
+
+/* Hero */
+.hx-hero{background:linear-gradient(110deg,#071e34 0%,#0a3a52 45%,#0a6e8a 100%);padding:72px 0 64px;position:relative;overflow:hidden;}
+.hx-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:rgba(10,110,138,.2);}
+.hx-hero::after{content:'';position:absolute;bottom:-60px;left:8%;width:200px;height:200px;border-radius:50%;background:rgba(0,194,184,.08);}
+.hx-hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 400px;gap:64px;align-items:center;}
+.hx-hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;}
+.hx-hero-h1{font-family:var(--font-serif);font-size:clamp(34px,4vw,52px);color:#fff;line-height:1.1;margin-bottom:18px;letter-spacing:-0.5px;}
+.hx-hero-sub{font-size:15px;color:rgba(255,255,255,.75);line-height:1.65;margin-bottom:32px;max-width:480px;}
+.hx-hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-hero-primary{background:var(--hx-teal-l);color:#fff;padding:13px 28px;border-radius:4px;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s;border:none;font-family:var(--font);}
+.btn-hero-primary:hover{background:#0cbde0;}
+.btn-hero-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4);padding:12px 26px;border-radius:4px;font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;font-family:var(--font);}
+.btn-hero-outline:hover{border-color:#fff;}
+.hx-hero-sliver{position:absolute;top:0;right:0;bottom:0;width:6px;background:var(--hx-teal-l);}
+
+/* Contact form card */
+.hx-form-card{background:#fff;border-radius:6px;padding:28px;box-shadow:0 16px 48px rgba(0,0,0,.22);position:relative;z-index:1;}
+.hx-form-title{font-size:16px;font-weight:700;color:var(--hx-navy);margin-bottom:4px;}
+.hx-form-sub{font-size:12px;color:var(--hx-text3);margin-bottom:20px;line-height:1.5;}
+.hx-fg{margin-bottom:12px;}
+.hx-fg label{display:block;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--hx-text2);margin-bottom:4px;}
+.hx-fg input,.hx-fg select,.hx-fg textarea{width:100%;border:1.5px solid var(--hx-border);border-radius:4px;padding:9px 11px;font-size:13px;font-family:var(--font);color:var(--hx-text);outline:none;transition:border-color .15s;}
+.hx-fg input:focus,.hx-fg select:focus,.hx-fg textarea:focus{border-color:var(--hx-teal);}
+.hx-fg input::placeholder,.hx-fg textarea::placeholder{color:#b0c4d0;}
+.hx-fg input.error,.hx-fg select.error{border-color:#c9231a;}
+.hx-f2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.hx-form-submit{width:100%;padding:11px;background:var(--hx-teal);color:#fff;border:none;border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);cursor:pointer;transition:background .15s;margin-top:4px;}
+.hx-form-submit:hover{background:var(--hx-teal-l);}
+.hx-form-privacy{font-size:10px;color:var(--hx-text3);margin-top:8px;text-align:center;line-height:1.5;}
+.hx-form-success{display:none;text-align:center;padding:24px 16px;}
+.hx-form-success-icon{width:48px;height:48px;background:#e6f9f4;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 12px;}
+.hx-form-success h3{font-size:16px;font-weight:700;color:var(--hx-navy);margin-bottom:6px;}
+.hx-form-success p{font-size:13px;color:var(--hx-text2);line-height:1.6;}
+
+/* Stats strip */
+.hx-stats{background:var(--hx-off);border-bottom:1px solid var(--hx-border);padding:36px 0;}
+.hx-stats-inner{display:grid;grid-template-columns:repeat(4,1fr);}
+.hx-stat{text-align:center;padding:0 24px;border-right:1px solid var(--hx-border);}
+.hx-stat:last-child{border-right:none;}
+.hx-stat-num{font-family:var(--font-serif);font-size:40px;color:var(--hx-teal);line-height:1;margin-bottom:8px;}
+.hx-stat-rule{height:1px;background:var(--hx-border);margin-bottom:8px;}
+.hx-stat-label{font-size:13px;font-weight:600;color:var(--hx-navy);margin-bottom:4px;}
+.hx-stat-desc{font-size:12px;color:var(--hx-text3);line-height:1.5;}
+
+/* Services section */
+.hx-services{padding:72px 0;border-bottom:1px solid var(--hx-border);}
+.hx-section-eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--hx-teal);margin-bottom:10px;}
+.hx-section-h2{font-family:var(--font-serif);font-size:clamp(28px,3vw,38px);color:var(--hx-navy);margin-bottom:14px;line-height:1.15;}
+.hx-section-sub{font-size:15px;color:var(--hx-text2);max-width:600px;line-height:1.65;margin-bottom:48px;}
+.hx-services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.hx-svc-card{border:1.5px solid var(--hx-border);border-radius:6px;padding:28px 24px;transition:box-shadow .2s,border-color .2s;cursor:default;}
+.hx-svc-card:hover{box-shadow:0 6px 24px rgba(10,110,138,.1);border-color:rgba(10,110,138,.3);}
+.hx-svc-num{font-family:var(--font-serif);font-size:28px;color:var(--hx-teal);opacity:.45;line-height:1;margin-bottom:14px;}
+.hx-svc-title{font-size:15px;font-weight:700;color:var(--hx-navy);margin-bottom:8px;line-height:1.3;}
+.hx-svc-desc{font-size:13px;color:var(--hx-text2);line-height:1.65;}
+
+/* Case study section */
+.hx-cases{padding:72px 0;background:var(--hx-navy);overflow:hidden;}
+.hx-cases-hdr{text-align:center;margin-bottom:44px;}
+.hx-cases-hdr .hx-section-eyebrow{color:rgba(255,255,255,.45);}
+.hx-cases-hdr .hx-section-h2{color:#fff;}
+.hx-cases-hdr .hx-section-sub{color:rgba(255,255,255,.6);margin:0 auto;}
+.hx-case-featured{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:6px;overflow:hidden;margin-bottom:24px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);}
+.hx-case-left{padding:40px 44px;display:flex;flex-direction:column;justify-content:center;}
+.hx-case-eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--merkury-teal);margin-bottom:8px;}
+.hx-case-org{font-size:18px;font-weight:700;color:#fff;margin-bottom:4px;}
+.hx-case-tagline{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:18px;}
+.hx-case-body{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:24px;}
+.hx-case-stats{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;}
+.hx-case-stat-num{font-family:var(--font-serif);font-size:30px;color:var(--hx-teal-l);line-height:1;}
+.hx-case-stat-txt{font-size:11px;color:rgba(255,255,255,.45);margin-top:4px;line-height:1.4;}
+.btn-case{background:var(--hx-teal-l);color:#fff;padding:10px 22px;border-radius:4px;font-size:13px;font-weight:700;border:none;font-family:var(--font);cursor:pointer;display:inline-block;}
+.hx-case-right{background:linear-gradient(135deg,#0a3a52 0%,#071e34 100%);display:flex;align-items:center;justify-content:center;min-height:280px;position:relative;overflow:hidden;}
+.hx-case-right::before{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(10,110,138,.25);}
+.hx-case-right-icon{font-size:64px;opacity:.2;}
+.hx-case-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.hx-case-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:20px 22px;cursor:pointer;transition:background .15s;}
+.hx-case-card:hover{background:rgba(255,255,255,.09);}
+.hx-cc-eyebrow{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px;}
+.hx-cc-org{font-size:14px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:6px;}
+.hx-cc-body{font-size:12px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:12px;}
+.hx-cc-link{font-size:12px;font-weight:600;color:var(--hx-teal-l);display:inline-flex;align-items:center;gap:3px;}
+.hx-cc-link::after{content:'→';}
+
+/* Capabilities grid */
+.hx-capabilities{padding:72px 0;border-bottom:1px solid var(--hx-border);}
+.hx-cap-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.hx-cap-left h2{font-family:var(--font-serif);font-size:clamp(28px,3vw,36px);color:var(--hx-navy);margin-bottom:12px;line-height:1.2;}
+.hx-cap-left p{font-size:14px;color:var(--hx-text2);line-height:1.7;margin-bottom:28px;}
+.hx-cap-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.hx-cap-item{padding:20px;background:var(--hx-off);border-radius:6px;border:1.5px solid var(--hx-border);}
+.hx-cap-icon{font-size:24px;margin-bottom:8px;}
+.hx-cap-name{font-size:14px;font-weight:700;color:var(--hx-navy);margin-bottom:4px;}
+.hx-cap-desc{font-size:12px;color:var(--hx-text2);line-height:1.6;}
+
+/* Partner logos */
+.hx-partners{background:var(--hx-off);padding:40px 0;border-bottom:1px solid var(--hx-border);}
+.hx-partners-title{font-size:13px;font-weight:700;color:var(--hx-text3);text-align:center;margin-bottom:28px;letter-spacing:.5px;text-transform:uppercase;}
+.hx-logos-track-wrap{overflow:hidden;position:relative;}
+.hx-logos-track-wrap::before,.hx-logos-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;}
+.hx-logos-track-wrap::before{left:0;background:linear-gradient(to right,var(--hx-off),transparent);}
+.hx-logos-track-wrap::after{right:0;background:linear-gradient(to left,var(--hx-off),transparent);}
+.hx-logos-track{display:flex;gap:52px;align-items:center;animation:scrollL 30s linear infinite;width:max-content;padding:4px 0;}
+@keyframes scrollL{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hx-logo-item{font-size:12px;font-weight:700;color:#b8c8d4;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;flex-shrink:0;}
+
+/* Insights */
+.hx-insights{padding:72px 0;border-bottom:1px solid var(--hx-border);}
+.hx-insights-inner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:48px;}
+.hx-insight-card{cursor:pointer;}
+.hx-insight-photo{height:160px;border-radius:6px;overflow:hidden;margin-bottom:14px;}
+.hx-ip1{background:linear-gradient(135deg,#c8dde6 0%,#90b8cc 100%);}
+.hx-ip2{background:linear-gradient(135deg,#c8e6da 0%,#90c4b0 100%);}
+.hx-ip3{background:linear-gradient(135deg,#ccd4e0 0%,#9aaac4 100%);}
+.hx-insight-type{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--hx-text3);margin-bottom:6px;}
+.hx-insight-title{font-size:15px;font-weight:700;color:var(--hx-navy);margin-bottom:6px;line-height:1.35;}
+.hx-insight-desc{font-size:13px;color:var(--hx-text2);line-height:1.6;margin-bottom:10px;}
+.hx-insight-link{font-size:13px;font-weight:600;color:var(--hx-teal);display:inline-flex;align-items:center;gap:4px;}
+.hx-insight-link::after{content:'→';}
+
+/* CTA band */
+.hx-cta-band{background:var(--hx-teal);padding:56px 0;overflow:hidden;position:relative;}
+.hx-cta-band::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.08);}
+.hx-cta-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative;z-index:1;}
+.hx-cta-h2{font-family:var(--font-serif);font-size:clamp(24px,3vw,34px);color:#fff;margin-bottom:10px;line-height:1.2;}
+.hx-cta-p{font-size:14px;color:rgba(255,255,255,.8);line-height:1.65;}
+.hx-cta-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-end;}
+.btn-cta-white{background:#fff;color:var(--hx-navy);padding:12px 24px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;border:none;font-family:var(--font);}
+.btn-cta-white:hover{background:var(--hx-off);}
+.btn-cta-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);padding:11px 24px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);transition:border-color .15s;}
+.btn-cta-outline:hover{border-color:#fff;}
+
+/* Footer */
+footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
+.footer-inner{max-width:var(--mw);margin:0 auto;padding:0 var(--g);}
+.footer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;}
+.footer-logo-txt{font-size:17px;font-weight:700;color:#fff;letter-spacing:-0.3px;}
+.footer-logo-txt span{color:var(--hx-teal);}
+.footer-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-bottom:36px;}
+.fc h4{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06);}
+.fc a{display:block;font-size:13px;color:rgba(255,255,255,.55);padding:3px 0;cursor:pointer;transition:color .15s;}
+.fc a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding:16px 0;display:flex;justify-content:space-between;align-items:center;font-size:11px;flex-wrap:wrap;gap:8px;}
+.footer-bottom-links{display:flex;flex-wrap:wrap;}
+.footer-bottom-links a{color:rgba(255,255,255,.35);padding:0 10px;border-right:1px solid rgba(255,255,255,.12);font-size:11px;cursor:pointer;}
+.footer-bottom-links a:last-child{border-right:none;}
+
+/* Resolve trigger strip (bottom of view 1, demo-only) */
+.resolve-strip{background:var(--merkury-navy);padding:20px var(--g);}
+.resolve-strip-inner{max-width:var(--mw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+.resolve-strip-left{display:flex;align-items:center;gap:12px;}
+.rs-dot{width:10px;height:10px;border-radius:50%;background:var(--merkury-teal);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0;}
+.resolve-strip-label strong{color:var(--merkury-teal);font-size:14px;font-weight:700;display:block;margin-bottom:2px;}
+.resolve-strip-label span{font-size:12px;color:rgba(255,255,255,.5);}
+.btn-resolve{background:var(--merkury-teal);color:var(--merkury-navy);padding:12px 26px;border-radius:4px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;border:none;font-family:var(--font);display:flex;align-items:center;gap:8px;}
+.btn-resolve:hover{background:#00ddd2;transform:scale(1.02);}
+
+/* ── VIEW 2 — SPLIT: PERSONALIZED + AEP ─────────────── */
+.v2-layout{display:grid;grid-template-columns:1fr 420px;min-height:calc(100vh - 130px);}
+.v2-left{border-right:1px solid var(--hx-border);overflow-y:auto;}
+.v2-right{background:var(--merkury-navy);overflow-y:auto;}
+.v2-account-bar{background:#071428;padding:9px 28px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.06);}
+.v2-ab-dot{width:7px;height:7px;border-radius:50%;background:var(--merkury-teal);animation:pulse 1.8s ease-in-out infinite;}
+.v2-ab-text{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--merkury-teal);}
+.v2-ab-account{margin-left:auto;font-size:11px;font-weight:600;color:rgba(255,255,255,.6);}
+.v2-hero{background:linear-gradient(135deg,#071e34 0%,#0a3a52 45%,#0a6e8a 100%);padding:40px 28px;position:relative;overflow:hidden;}
+.v2-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:280px;height:280px;border-radius:50%;background:rgba(10,110,138,.18);}
+.v2-chip{display:inline-flex;align-items:center;gap:7px;background:rgba(0,194,184,.15);border:1px solid rgba(0,194,184,.35);border-radius:20px;padding:4px 12px;margin-bottom:14px;}
+.v2-chip-dot{width:5px;height:5px;border-radius:50%;background:var(--merkury-teal);}
+.v2-chip-text{font-size:11px;font-weight:600;color:var(--merkury-teal);}
+.v2-hero-h1{font-family:var(--font-serif);font-size:28px;color:#fff;line-height:1.15;margin-bottom:10px;position:relative;z-index:1;}
+.v2-hero-sub{font-size:13px;color:rgba(255,255,255,.72);line-height:1.6;margin-bottom:20px;position:relative;z-index:1;}
+.v2-hero-btns{display:flex;gap:10px;position:relative;z-index:1;}
+.btn-v2-p{background:var(--hx-teal-l);color:#fff;padding:9px 18px;border-radius:4px;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:var(--font);}
+.btn-v2-o{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);padding:8px 18px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);}
+.v2-content{padding:24px 28px;}
+.v2-rec-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--hx-teal);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.v2-rec-label::after{content:'';flex:1;height:1px;background:var(--hx-border);}
+.v2-prod-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.v2-mini-card{border:1.5px solid var(--hx-border);border-radius:6px;padding:12px;cursor:pointer;transition:border-color .15s;}
+.v2-mini-card:hover,.v2-mini-card.highlighted{border-color:var(--hx-teal);background:var(--hx-sky);}
+.v2-mini-icon{font-size:22px;margin-bottom:5px;}
+.v2-mini-name{font-size:12px;font-weight:700;color:var(--hx-navy);}
+.v2-mini-tag{font-size:10px;color:var(--hx-teal);font-weight:600;margin-top:2px;}
+.v2-callout{background:var(--hx-sky);border:1px solid rgba(10,110,138,.15);border-radius:6px;padding:14px;margin-top:4px;}
+.v2-callout-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--hx-teal);margin-bottom:5px;}
+.v2-callout-text{font-size:12px;color:var(--hx-text2);line-height:1.6;}
+
+/* AEP Panel */
+.aep-panel{display:flex;flex-direction:column;height:100%;}
+.aep-header{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px;background:#0a1825;}
+.aep-logo-mark{width:22px;height:22px;background:var(--aep-blue);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0;}
+.aep-logo-name{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);}
+.aep-logo-sub{font-size:9px;color:rgba(255,255,255,.4);}
+.aep-live-badge{margin-left:auto;background:rgba(13,158,110,.2);border:1px solid var(--hx-green);border-radius:4px;padding:2px 7px;font-size:9px;font-weight:700;color:var(--hx-green);letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
+.aep-live-dot{width:4px;height:4px;border-radius:50%;background:var(--hx-green);animation:pulse 1.5s infinite;}
+.aep-body{flex:1;padding:14px 18px;overflow-y:auto;}
+.aep-sec{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid rgba(255,255,255,.05);}
+.aep-account-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:6px;padding:12px;margin-bottom:12px;}
+.aep-account-name{font-size:15px;font-weight:700;color:#fff;margin-bottom:2px;}
+.aep-account-id{font-size:9px;color:rgba(255,255,255,.3);font-family:'Courier New',monospace;}
+.aep-chips{display:flex;gap:5px;margin-top:8px;flex-wrap:wrap;}
+.aep-chip{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
+.aep-chip-acct{background:rgba(0,194,184,.15);color:var(--merkury-teal);border:1px solid rgba(0,194,184,.3);}
+.aep-chip-anon{background:rgba(255,255,255,.06);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1);}
+.aep-chip-intent{background:rgba(13,158,110,.15);color:#2dd4a0;border:1px solid rgba(13,158,110,.3);}
+.aep-intent-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:12px;margin-bottom:12px;}
+.aep-intent-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.aep-intent-label{font-size:11px;font-weight:600;color:rgba(255,255,255,.55);}
+.aep-intent-score{font-size:26px;font-weight:700;color:#fff;line-height:1;}
+.aep-intent-score span{font-size:13px;color:rgba(255,255,255,.35);font-weight:400;}
+.aep-bar-wrap{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;}
+.aep-bar{height:100%;background:linear-gradient(90deg,var(--hx-teal),var(--merkury-teal));border-radius:3px;transition:width 1.5s cubic-bezier(.16,1,.3,1);}
+.aep-threshold{font-size:9px;color:rgba(255,255,255,.28);margin-top:4px;text-align:right;}
+.aep-field-row{display:flex;align-items:flex-start;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.aep-field-row:last-child{border-bottom:none;}
+.aep-field-key{font-size:10px;color:rgba(255,255,255,.38);font-family:'Courier New',monospace;}
+.aep-field-val{font-size:10px;font-weight:600;color:rgba(255,255,255,.8);text-align:right;max-width:180px;word-break:break-all;}
+.aep-field-val.popping{color:var(--merkury-teal);}
+.aep-field-null{color:rgba(255,255,255,.2);font-style:italic;font-weight:400;}
+.aep-session-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:6px;padding:12px;margin-bottom:12px;}
+.aep-session-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+.aep-session-label{font-size:11px;color:rgba(255,255,255,.45);}
+.aep-session-val{font-size:18px;font-weight:700;color:#fff;}
+.aep-pages{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
+.aep-page-tag{font-size:9px;font-weight:600;background:rgba(20,115,230,.2);color:#5aa8f8;border:1px solid rgba(20,115,230,.3);border-radius:3px;padding:2px 6px;}
+.aep-page-tag.hot{background:rgba(0,194,184,.15);color:var(--merkury-teal);border-color:rgba(0,194,184,.3);}
+.aep-next{background:rgba(13,158,110,.1);border:1px solid rgba(13,158,110,.2);border-radius:6px;padding:12px;margin-top:12px;}
+.aep-next-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--hx-green);margin-bottom:5px;}
+.aep-next-text{font-size:12px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:3px;}
+.aep-next-sub{font-size:10px;color:rgba(255,255,255,.4);}
+.btn-advance{background:var(--hx-green);color:#fff;border:none;border-radius:4px;padding:11px 20px;font-size:13px;font-weight:700;font-family:var(--font);cursor:pointer;transition:background .15s;display:flex;align-items:center;gap:8px;margin:14px 18px;width:calc(100% - 36px);justify-content:center;}
+.btn-advance:hover{background:#0bb87e;}
+.btn-advance:disabled{opacity:.4;pointer-events:none;cursor:default;}
+
+/* ── VIEW 3 — AJO + MARKETO ──────────────────────────── */
+.v3-layout{display:grid;grid-template-columns:1fr 400px;min-height:calc(100vh - 130px);}
+.v3-left{background:#0d1117;border-right:1px solid rgba(255,255,255,.06);overflow-y:auto;}
+.v3-right{background:#fff;overflow-y:auto;}
+.ajo-header{padding:14px 22px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px;background:#13172a;}
+.ajo-logo-mark{width:26px;height:26px;background:var(--ajo-purple);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0;}
+.ajo-logo-name{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);}
+.ajo-logo-sub{font-size:9px;color:rgba(255,255,255,.4);}
+.ajo-trigger-badge{margin-left:auto;background:rgba(110,78,218,.25);border:1px solid var(--ajo-purple);border-radius:4px;padding:2px 8px;font-size:9px;font-weight:700;color:#a78ff0;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
+.ajo-trigger-dot{width:4px;height:4px;border-radius:50%;background:var(--ajo-purple);animation:pulse 1.2s infinite;}
+.ajo-body{padding:22px;}
+.ajo-journey-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.82);margin-bottom:3px;}
+.ajo-journey-sub{font-size:11px;color:rgba(255,255,255,.32);margin-bottom:22px;}
+.ajo-node{display:flex;align-items:flex-start;gap:12px;margin-bottom:3px;}
+.ajo-connector{width:2px;background:rgba(255,255,255,.07);height:20px;margin-left:16px;}
+.ajo-connector.active{background:linear-gradient(180deg,var(--ajo-purple),rgba(110,78,218,.2));}
+.ajo-dot{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;border:2px solid rgba(255,255,255,.09);}
+.ajo-dot.trigger{background:rgba(110,78,218,.25);border-color:var(--ajo-purple);}
+.ajo-dot.condition{background:rgba(20,115,230,.2);border-color:var(--aep-blue);}
+.ajo-dot.action{background:rgba(13,158,110,.2);border-color:var(--hx-green);}
+.ajo-dot.active{box-shadow:0 0 0 4px rgba(110,78,218,.2);}
+.ajo-info{padding-top:3px;flex:1;}
+.ajo-info-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.75);}
+.ajo-info-detail{font-size:10px;color:rgba(255,255,255,.32);margin-top:1px;}
+.ajo-info-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(110,78,218,.2);border:1px solid rgba(110,78,218,.35);border-radius:3px;padding:2px 7px;font-size:9px;font-weight:700;color:#a78ff0;margin-top:4px;}
+.ajo-info-chip.green{background:rgba(13,158,110,.15);border-color:rgba(13,158,110,.35);color:#2dd4a0;}
+.ajo-info-chip.blue{background:rgba(20,115,230,.15);border-color:rgba(20,115,230,.35);color:#5aa8f8;}
+.ajo-enrolled{background:rgba(110,78,218,.1);border:1px solid rgba(110,78,218,.22);border-radius:6px;padding:14px;margin-top:18px;}
+.ajo-enr-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#a78ff0;margin-bottom:5px;}
+.ajo-enr-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;}
+.ajo-enr-detail{font-size:10px;color:rgba(255,255,255,.4);}
+.ajo-enr-score-row{display:flex;align-items:center;gap:10px;margin-top:10px;}
+.ajo-enr-score{font-size:24px;font-weight:700;color:#2dd4a0;}
+.ajo-enr-label2{font-size:10px;color:rgba(255,255,255,.4);}
+.ajo-enr-badge{background:rgba(13,158,110,.2);border:1px solid rgba(13,158,110,.35);border-radius:3px;padding:2px 7px;font-size:9px;font-weight:700;color:#2dd4a0;}
+.mk-header{padding:14px 22px;border-bottom:1px solid var(--hx-border);display:flex;align-items:center;gap:10px;background:#fff;}
+.mk-logo-mark{width:26px;height:26px;background:var(--mk-orange);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0;}
+.mk-logo-name{font-size:12px;font-weight:700;color:#1a1a1a;}
+.mk-logo-sub{font-size:9px;color:#888;}
+.mk-fired-badge{margin-left:auto;background:#fff5f0;border:1px solid var(--mk-orange);border-radius:4px;padding:2px 8px;font-size:9px;font-weight:700;color:var(--mk-orange);letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
+.mk-fired-dot{width:4px;height:4px;border-radius:50%;background:var(--mk-orange);animation:pulse 1.4s infinite;}
+.mk-body{padding:18px 22px;}
+.mk-sec-title{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#888;margin-bottom:9px;padding-bottom:5px;border-bottom:1px solid var(--hx-border);}
+.mk-program-card{border:1.5px solid var(--hx-border);border-radius:6px;padding:12px;margin-bottom:8px;}
+.mk-program-card.active{border-color:var(--mk-orange);background:#fff8f4;}
+.mk-prog-name{font-size:12px;font-weight:700;color:var(--hx-navy);margin-bottom:2px;}
+.mk-prog-type{font-size:9px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.8px;}
+.mk-prog-status{display:flex;align-items:center;gap:5px;margin-top:7px;}
+.mk-dot{width:5px;height:5px;border-radius:50%;}
+.mk-dot.active{background:var(--mk-orange);animation:pulse 1.4s infinite;}
+.mk-dot.waiting{background:#ccc;}
+.mk-dot.queued{background:var(--aep-blue);}
+.mk-status-txt{font-size:11px;font-weight:600;color:var(--hx-text2);}
+.mk-smart-list{background:var(--hx-off);border-radius:5px;padding:10px;margin-top:7px;}
+.mk-sl-title{font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px;}
+.mk-filter{display:flex;align-items:center;gap:5px;padding:3px 0;font-size:11px;color:var(--hx-text2);}
+.mk-fk{font-weight:600;color:var(--hx-navy);}
+.mk-fo{color:#999;font-style:italic;}
+.mk-fv{font-weight:700;color:var(--mk-orange);}
+.mk-email{border:1px solid var(--hx-border);border-radius:6px;overflow:hidden;margin-top:10px;}
+.mk-email-hdr{background:var(--hx-navy);padding:10px 14px;}
+.mk-email-from{font-size:10px;color:rgba(255,255,255,.45);margin-bottom:2px;}
+.mk-email-subj{font-size:12px;font-weight:700;color:#fff;}
+.mk-email-body{padding:14px;background:#fff;}
+.mk-email-greeting{font-size:13px;font-weight:700;color:var(--hx-navy);margin-bottom:7px;}
+.mk-email-txt{font-size:12px;color:var(--hx-text2);line-height:1.65;margin-bottom:12px;}
+.mk-email-cta{background:var(--hx-teal);color:#fff;padding:8px 16px;border-radius:4px;font-size:12px;font-weight:700;display:inline-block;}
+.mk-email-merkury{background:var(--merkury-navy);padding:9px 14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.mk-merkury-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--merkury-teal);flex-shrink:0;}
+.mk-merkury-pill{font-size:9px;background:rgba(0,194,184,.1);border:1px solid rgba(0,194,184,.2);border-radius:3px;padding:2px 6px;color:rgba(255,255,255,.65);}
+.mk-merkury-pill span{color:var(--merkury-teal);font-weight:700;}
+.mk-loop-close{background:#f0fdf8;border:1px solid #9fe5cc;border-radius:6px;padding:12px 14px;margin-top:10px;}
+.mk-loop-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hx-green);margin-bottom:4px;}
+.mk-loop-txt{font-size:11px;color:#2a5040;line-height:1.65;}
+
+/* ── PERSONA SWITCHER ────────────────────────────────── */
+#persona-switcher{position:fixed;bottom:24px;right:24px;z-index:9999;font-family:var(--font);}
+#ps-toggle{display:flex;align-items:center;gap:8px;background:var(--merkury-navy);color:#fff;padding:10px 16px;border-radius:24px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.35);border:2px solid var(--merkury-teal);user-select:none;transition:background .15s;}
+#ps-toggle:hover{background:#152a40;}
+#ps-toggle .ps-dot{width:7px;height:7px;border-radius:50%;background:var(--merkury-teal);animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
+#ps-toggle .ps-chevron{font-size:9px;opacity:.7;transition:transform .2s;}
+#ps-toggle.open .ps-chevron{transform:rotate(180deg);}
+#ps-panel{display:none;position:absolute;bottom:calc(100% + 10px);right:0;background:#fff;border:1.5px solid var(--hx-border);border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;}
+#ps-panel.open{display:block;}
+.ps-hdr{background:var(--merkury-navy);padding:13px 18px;display:flex;align-items:center;justify-content:space-between;}
+.ps-hdr-left h3{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px;}
+.ps-hdr-left p{font-size:10px;color:rgba(255,255,255,.4);}
+.ps-badge{background:var(--merkury-teal);color:var(--merkury-navy);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
+.ps-active-bar{background:var(--hx-off);padding:8px 18px;border-bottom:1px solid var(--hx-border);font-size:10px;color:var(--hx-text3);display:flex;align-items:center;gap:7px;}
+.ps-active-bar strong{color:var(--hx-navy);font-size:11px;}
+.ps-active-dot{width:6px;height:6px;border-radius:50%;background:var(--merkury-teal);flex-shrink:0;}
+.ps-section-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--hx-text3);padding:9px 18px 3px;}
+.ps-persona-list{padding:0 10px 10px;}
+.ps-persona{display:flex;align-items:center;gap:10px;padding:9px;border-radius:6px;cursor:pointer;transition:background .12s;border:1.5px solid transparent;}
+.ps-persona:hover{background:var(--hx-off);}
+.ps-persona.active{background:#f0faf9;border-color:var(--merkury-teal);}
+.ps-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.ps-info{flex:1;min-width:0;}
+.ps-name{font-size:12px;font-weight:700;color:var(--hx-navy);}
+.ps-title{font-size:10px;color:var(--hx-text3);margin-top:1px;}
+.ps-check{font-size:13px;color:var(--merkury-teal);opacity:0;transition:opacity .15s;}
+.ps-persona.active .ps-check{opacity:1;}
+.ps-footer{border-top:1px solid var(--hx-border);padding:9px 18px;display:flex;align-items:center;justify-content:space-between;}
+.ps-reset{font-size:10px;font-weight:600;color:var(--hx-text3);cursor:pointer;transition:color .15s;}
+.ps-reset:hover{color:var(--hx-navy);}
+.ps-view-ind{font-size:10px;color:var(--hx-text3);}
+.ps-view-ind strong{color:var(--merkury-teal);}
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width:1024px){
+  :root{--g:24px;}
+  .hx-hero-inner,.hx-cap-inner,.hx-cta-inner{grid-template-columns:1fr;}
+  .hx-form-card{max-width:480px;}
+  .hx-stats-inner{grid-template-columns:1fr 1fr;gap:20px;}
+  .hx-services-grid{grid-template-columns:1fr 1fr;}
+  .hx-case-featured{grid-template-columns:1fr;}
+  .hx-case-cards,.hx-insights-inner{grid-template-columns:1fr 1fr;}
+  .v2-layout,.v3-layout{grid-template-columns:1fr;}
+  .v2-right,.v3-left,.v3-right{max-height:55vh;}
+  .footer-cols{grid-template-columns:1fr 1fr 1fr;}
+}
+@media(max-width:768px){
+  .hx-services-grid,.hx-cap-grid{grid-template-columns:1fr;}
+  .hx-case-cards,.hx-insights-inner{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .footer-cols{grid-template-columns:1fr 1fr;}
+  .v2-prod-row{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- PRESENTER CONTROL BAR -->
+<div class="presenter-bar">
+  <div class="presenter-bar-inner">
+    <div class="presenter-bar-left">
+      <div class="pbar-dot"></div>
+      <span class="pbar-label">Presenter Controls</span>
+      <span class="pbar-sub">Demo Purposes Only — Adobe Summit 2026 · Merkle Booth</span>
+    </div>
+    <div class="presenter-bar-right">
+      <span class="pbar-persona-label">Simulate visit as:</span>
+      <button class="pbar-btn pbar-btn-anon" onclick="applyPersona('default');goToView(1);">👤 Step 1 — Anonymous</button>
+      <button class="pbar-btn pbar-btn-prospect" onclick="triggerResolve();">🏭 Step 2–4 — Resolve MedLink</button>
+      <button class="pbar-btn pbar-btn-auth" onclick="applyPersonaAndResolve('sarah_tillman');">📊 Sarah's View — Internal</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-top">
+    <div class="nav-logo" onclick="goToView(1)">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 2L9 16M4 6.5C4 4 6 2 9 2C12 2 14 4 14 6.5C14 9 12 10.5 9 10.5C6 10.5 4 9 4 6.5Z" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="9" cy="13" r="1.5" fill="white"/>
+        </svg>
+      </div>
+      <span class="nav-logo-name">Helix<span>Health</span></span>
+    </div>
+    <div class="nav-top-right">
+      <a href="#" onclick="return false;">🔍</a>
+      <a href="#" onclick="return false;">Partner Portal</a>
+    </div>
+  </div>
+  <div class="nav-main">
+    <div class="nav-links">
+      <a href="#" onclick="return false;">Products</a>
+      <a href="#" onclick="return false;">Solutions</a>
+      <a href="#" onclick="return false;">Distribution Partners</a>
+      <a href="#" onclick="return false;">Clinical Evidence</a>
+      <a href="#" onclick="return false;">Resources</a>
+      <a href="#" onclick="return false;">About</a>
+    </div>
+    <div class="nav-cta" onclick="return false;">Request a Demo</div>
+  </div>
+</nav>
+
+
+
+<!-- IDENTITY SAMPLE BUTTON + PANEL -->
+<button id="id-sample-btn" onclick="toggleIdPanel()"><div class="isb-dot"></div>Identity Sample</button>
+<div id="id-panel">
+  <div class="idp-header">
+    <div class="idp-header-top">
+      <div class="idp-title">Real-Time Identity Sample</div>
+      <span class="idp-close" onclick="closeIdPanel()">&#215;</span>
+    </div>
+    <div class="idp-sub">Merkury B2B Connect — Schema A (Account-Level)</div>
+  </div>
+  <div class="idp-body" id="idp-body">
+    <div class="idp-empty">Select a persona to see live Merkury tag data.</div>
+  </div>
+  <div class="idp-resolve-bar" id="idp-resolve-bar" style="display:none;">
+    <div class="idp-resolve-dot"></div>
+    <div class="idp-resolve-text">Resolved in <span class="idp-resolve-ms" id="idp-resolve-ms">—</span></div>
+  </div>
+</div>
+
+<!-- ══════ VIEW 1 — HOME PAGE ══════ -->
+<div id="view-1" class="view active">
+
+  <!-- HERO -->
+  <div class="hx-hero">
+    <div class="w">
+      <div class="hx-hero-inner">
+        <div>
+          <p class="hx-hero-eyebrow">Diagnostic Solutions for Health Networks</p>
+          <h1 class="hx-hero-h1">Rapid diagnostics built for the demands of modern healthcare distribution</h1>
+          <p class="hx-hero-sub">HelixCheck test kits deliver clinical-grade accuracy across pharmacy networks, GPOs and health system distribution partners — at the scale and speed your network demands.</p>
+          <div class="hx-hero-btns">
+            <button class="btn-hero-primary" onclick="document.getElementById('contact-form-section').scrollIntoView({behavior:'smooth'})">Request Network Pricing</button>
+            <button class="btn-hero-outline" onclick="return false;">View Clinical Evidence →</button>
+          </div>
+        </div>
+        <div id="contact-form-section">
+          <div class="hx-form-card">
+            <div id="hx-form-fields">
+              <div class="hx-form-title">Talk to a Distribution Specialist</div>
+              <div class="hx-form-sub">GPO & network pricing available. Response within 1 business day.</div>
+              <div class="hx-f2">
+                <div class="hx-fg"><label>First Name *</label><input type="text" id="hf-fname" placeholder="Jane"></div>
+                <div class="hx-fg"><label>Last Name *</label><input type="text" id="hf-lname" placeholder="Smith"></div>
+              </div>
+              <div class="hx-fg"><label>Business Email *</label><input type="email" id="hf-email" placeholder="jane@organization.com"></div>
+              <div class="hx-fg"><label>Organization *</label><input type="text" id="hf-org" placeholder="Distribution company or health system"></div>
+              <div class="hx-fg"><label>Product Interest</label>
+                <select id="hf-product">
+                  <option value="">Select a product...</option>
+                  <option>HelixCheck Pro — Respiratory Panel</option>
+                  <option>HelixCheck Rapid — Flu A/B + COVID</option>
+                  <option>HelixCheck Combo — 10-panel STI</option>
+                  <option>Full Portfolio Evaluation</option>
+                </select>
+              </div>
+              <button class="hx-form-submit" onclick="submitHxForm()">Submit Request →</button>
+              <p class="hx-form-privacy">By submitting you agree to our Privacy Policy. We never share your data.</p>
+            </div>
+            <div class="hx-form-success" id="hx-form-success">
+              <div class="hx-form-success-icon">✓</div>
+              <h3>Request received!</h3>
+              <p>A HelixHealth distribution specialist will follow up within one business day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hx-hero-sliver"></div>
+  </div>
+
+  <!-- STATS -->
+  <div class="hx-stats">
+    <div class="hx-stats-inner w">
+      <div class="hx-stat">
+        <div class="hx-stat-num">2,400+</div>
+        <div class="hx-stat-rule"></div>
+        <div class="hx-stat-label">Network locations served</div>
+        <div class="hx-stat-desc">Pharmacy, clinic and health system distribution partners across North America.</div>
+      </div>
+      <div class="hx-stat">
+        <div class="hx-stat-num">98.7%</div>
+        <div class="hx-stat-rule"></div>
+        <div class="hx-stat-label">Sensitivity, HelixCheck Pro panel</div>
+        <div class="hx-stat-desc">Validated across multi-site clinical trials for respiratory pathogen detection.</div>
+      </div>
+      <div class="hx-stat">
+        <div class="hx-stat-num">14 min</div>
+        <div class="hx-stat-rule"></div>
+        <div class="hx-stat-label">Median time-to-result</div>
+        <div class="hx-stat-desc">Point-of-care performance optimized for high-throughput pharmacy settings.</div>
+      </div>
+      <div class="hx-stat">
+        <div class="hx-stat-num">$0</div>
+        <div class="hx-stat-rule"></div>
+        <div class="hx-stat-label">Setup cost, qualified GPO partners</div>
+        <div class="hx-stat-desc">No upfront cost for established GPO network members meeting volume thresholds.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="hx-services">
+    <div class="w">
+      <p class="hx-section-eyebrow">Services & Capabilities</p>
+      <h2 class="hx-section-h2">What we bring to your distribution network</h2>
+      <p class="hx-section-sub">From portfolio evaluation and network onboarding to clinical training and regulatory support — HelixHealth works alongside your team at every stage.</p>
+      <div class="hx-services-grid">
+        <div class="hx-svc-card"><div class="hx-svc-num">01</div><div class="hx-svc-title">Network diagnostics &amp; portfolio audit</div><div class="hx-svc-desc">Assess your current test kit portfolio against network demand, clinical requirements and reimbursement landscape to identify gaps and opportunities.</div></div>
+        <div class="hx-svc-card"><div class="hx-svc-num">02</div><div class="hx-svc-title">GPO pricing &amp; contract structuring</div><div class="hx-svc-desc">Negotiate volume-based pricing tiers and build compliant GPO contract frameworks tailored to your network's procurement model.</div></div>
+        <div class="hx-svc-card"><div class="hx-svc-num">03</div><div class="hx-svc-title">Clinical &amp; regulatory onboarding</div><div class="hx-svc-desc">CLIA waiver documentation, staff training materials and state-level compliance support — handled by our clinical affairs team.</div></div>
+        <div class="hx-svc-card"><div class="hx-svc-num">04</div><div class="hx-svc-title">Demand planning &amp; inventory management</div><div class="hx-svc-desc">Data-driven forecasting models built around your network's seasonal demand patterns to eliminate stockouts and overages.</div></div>
+        <div class="hx-svc-card"><div class="hx-svc-num">05</div><div class="hx-svc-title">Co-marketing &amp; patient engagement</div><div class="hx-svc-desc">Pharmacy-ready point-of-care materials, digital campaigns and provider education content co-branded for your network.</div></div>
+        <div class="hx-svc-card"><div class="hx-svc-num">06</div><div class="hx-svc-title">Outcomes reporting &amp; network analytics</div><div class="hx-svc-desc">Quarterly utilization reports, reimbursement recovery analysis and patient outcome benchmarking across your network locations.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE STUDIES -->
+  <div class="hx-cases">
+    <div class="w">
+      <div class="hx-cases-hdr">
+        <p class="hx-section-eyebrow">How we've helped</p>
+        <h2 class="hx-section-h2">Distribution partnerships built to last</h2>
+        <p class="hx-section-sub">From regional pharmacy chains to national GPOs — see how HelixHealth helps distribution partners grow test volume, improve margins and better serve their pharmacy clients.</p>
+      </div>
+      <div class="hx-case-featured">
+        <div class="hx-case-left">
+          <p class="hx-case-eyebrow">Featured Partner Story</p>
+          <div class="hx-case-org">NationWide Pharmacy Group</div>
+          <div class="hx-case-tagline">Scaling respiratory testing across 640 locations</div>
+          <p class="hx-case-body">NationWide Pharmacy Group needed a respiratory testing solution that could scale from pilot to full network rollout in under 90 days — meeting seasonal surge demand without supply chain disruption. HelixHealth deployed HelixCheck Pro across all 640 locations, delivering GPO pricing, CLIA waiver support and demand planning through a single partnership.</p>
+          <div class="hx-case-stats">
+            <div><div class="hx-case-stat-num">640</div><div class="hx-case-stat-txt">Locations onboarded in 87 days</div></div>
+            <div><div class="hx-case-stat-num">34%</div><div class="hx-case-stat-txt">Increase in test kit margin vs. prior supplier</div></div>
+          </div>
+          <button class="btn-case" onclick="return false;">Read full story</button>
+        </div>
+        <div class="hx-case-right"><div class="hx-case-right-icon">🏥</div></div>
+      </div>
+      <div class="hx-case-cards">
+        <div class="hx-case-card">
+          <div class="hx-cc-eyebrow">GPO</div>
+          <div class="hx-cc-org">MidSouth Healthcare Alliance</div>
+          <div class="hx-cc-body">Consolidated test kit purchasing across 18 member health systems, reducing procurement cost by 22% and standardizing to a single respiratory testing platform.</div>
+          <a class="hx-cc-link" href="#" onclick="return false;">Read story</a>
+        </div>
+        <div class="hx-case-card">
+          <div class="hx-cc-eyebrow">Pharmacy Distributor</div>
+          <div class="hx-cc-org">Cascade Medical Distribution</div>
+          <div class="hx-cc-body">Launched a new point-of-care testing line for their pharmacy clients with full co-marketing support, adding $1.2M in net-new distribution revenue in year one.</div>
+          <a class="hx-cc-link" href="#" onclick="return false;">Read story</a>
+        </div>
+        <div class="hx-case-card">
+          <div class="hx-cc-eyebrow">Urgent Care Network</div>
+          <div class="hx-cc-org">FastCare Clinics</div>
+          <div class="hx-cc-body">Deployed HelixCheck Rapid across 210 urgent care sites ahead of flu season, achieving 99.2% test availability and zero CLIA compliance issues across 12 states.</div>
+          <a class="hx-cc-link" href="#" onclick="return false;">Read story</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPABILITIES -->
+  <div class="hx-capabilities">
+    <div class="w">
+      <div class="hx-cap-inner">
+        <div class="hx-cap-left">
+          <p class="hx-section-eyebrow">Our approach</p>
+          <h2>Hands-on expertise from distribution to patient outcome</h2>
+          <p>We work alongside your distribution team — not just as a supplier, but as a clinical and commercial partner embedded in your network's operations. From contract through to outcomes reporting, every engagement is built around measurable results.</p>
+          <button class="btn-hero-primary" style="font-size:14px;padding:11px 24px;" onclick="return false;">Meet our team →</button>
+        </div>
+        <div class="hx-cap-grid">
+          <div class="hx-cap-item"><div class="hx-cap-icon">🧬</div><div class="hx-cap-name">Clinical Affairs</div><div class="hx-cap-desc">Dedicated team for CLIA waiver, training and regulatory compliance across all 50 states.</div></div>
+          <div class="hx-cap-item"><div class="hx-cap-icon">📦</div><div class="hx-cap-name">Supply Chain</div><div class="hx-cap-desc">99.4% on-time fulfillment with 48-hour emergency replenishment for surge events.</div></div>
+          <div class="hx-cap-item"><div class="hx-cap-icon">📊</div><div class="hx-cap-name">Network Analytics</div><div class="hx-cap-desc">Real-time utilization dashboards and quarterly performance reviews for every partner.</div></div>
+          <div class="hx-cap-item"><div class="hx-cap-icon">💼</div><div class="hx-cap-name">Commercial Strategy</div><div class="hx-cap-desc">GPO pricing, co-marketing, reimbursement optimization and contract lifecycle management.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTNER LOGOS -->
+  <div class="hx-partners">
+    <div class="hx-partners-title">Distribution partners &amp; network members</div>
+    <div class="hx-logos-track-wrap">
+      <div class="hx-logos-track">
+        <span class="hx-logo-item">Cardinal Health</span><span class="hx-logo-item">McKesson</span><span class="hx-logo-item">AmerisourceBergen</span><span class="hx-logo-item">Henry Schein</span><span class="hx-logo-item">Medline</span><span class="hx-logo-item">Vizient</span><span class="hx-logo-item">Premier Inc</span><span class="hx-logo-item">Intalere</span><span class="hx-logo-item">HealthTrust</span><span class="hx-logo-item">Provista</span><span class="hx-logo-item">Walgreens Specialty</span><span class="hx-logo-item">CVS Pharmacy</span>
+        <span class="hx-logo-item">Cardinal Health</span><span class="hx-logo-item">McKesson</span><span class="hx-logo-item">AmerisourceBergen</span><span class="hx-logo-item">Henry Schein</span><span class="hx-logo-item">Medline</span><span class="hx-logo-item">Vizient</span><span class="hx-logo-item">Premier Inc</span><span class="hx-logo-item">Intalere</span><span class="hx-logo-item">HealthTrust</span><span class="hx-logo-item">Provista</span><span class="hx-logo-item">Walgreens Specialty</span><span class="hx-logo-item">CVS Pharmacy</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="hx-insights">
+    <div class="w">
+      <p class="hx-section-eyebrow">Latest Insights</p>
+      <h2 class="hx-section-h2">Research &amp; perspectives for healthcare distributors</h2>
+      <div class="hx-insights-inner">
+        <div class="hx-insight-card">
+          <div class="hx-insight-photo hx-ip1"></div>
+          <div class="hx-insight-type">White Paper</div>
+          <div class="hx-insight-title">2025 State of Respiratory Testing: What GPOs Need to Know</div>
+          <div class="hx-insight-desc">Demand trends, pricing dynamics and CLIA compliance shifts shaping the test kit market in 2025 and beyond.</div>
+          <a class="hx-insight-link" href="#" onclick="return false;">Download report</a>
+        </div>
+        <div class="hx-insight-card">
+          <div class="hx-insight-photo hx-ip2"></div>
+          <div class="hx-insight-type">Blog</div>
+          <div class="hx-insight-title">How pharmacy distributors are capturing margin with point-of-care testing</div>
+          <div class="hx-insight-desc">Three strategies high-performing distribution networks use to grow test kit revenue without adding complexity.</div>
+          <a class="hx-insight-link" href="#" onclick="return false;">Read article</a>
+        </div>
+        <div class="hx-insight-card">
+          <div class="hx-insight-photo hx-ip3"></div>
+          <div class="hx-insight-type">Case Study</div>
+          <div class="hx-insight-title">From 12 suppliers to one: How MidSouth consolidated diagnostic purchasing</div>
+          <div class="hx-insight-desc">A regional GPO's journey to a single-platform testing strategy — and what it meant for cost, compliance and outcomes.</div>
+          <a class="hx-insight-link" href="#" onclick="return false;">Read story</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="hx-cta-band">
+    <div class="w">
+      <div class="hx-cta-inner">
+        <div>
+          <h2 class="hx-cta-h2">Questions? Let's talk.</h2>
+          <p class="hx-cta-p">Connect with a HelixHealth distribution specialist. We typically respond within one business day.</p>
+        </div>
+        <div class="hx-cta-btns">
+          <button class="btn-cta-white" onclick="document.getElementById('contact-form-section').scrollIntoView({behavior:'smooth'})">Request Pricing</button>
+          <button class="btn-cta-outline" onclick="return false;">Call Sales: 800-435-4985</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-logo-txt">Helix<span>Health</span></div>
+      </div>
+      <div class="footer-cols">
+        <div class="fc"><h4>Products</h4><a>HelixCheck Pro</a><a>HelixCheck Rapid</a><a>HelixCheck Combo</a><a>All Products</a></div>
+        <div class="fc"><h4>Distribution</h4><a>GPO Partners</a><a>Pharmacy Networks</a><a>Health Systems</a><a>Urgent Care</a></div>
+        <div class="fc"><h4>Company</h4><a>About Us</a><a>Clinical Affairs</a><a>Newsroom</a><a>Careers</a></div>
+        <div class="fc"><h4>Support</h4><a onclick="document.getElementById('contact-form-section').scrollIntoView({behavior:'smooth'})">Contact Us</a><a>Partner Portal</a><a>Documentation</a><a>Legal</a></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 HelixHealth Inc. All Rights Reserved.</span>
+        <div class="footer-bottom-links"><a>Privacy Policy</a><a>Terms of Use</a><a>Cookie Settings</a><a>Accessibility</a></div>
+      </div>
+    </div>
+  </footer>
+</div><!-- /view-1 -->
+
+<!-- ══════ VIEW 2 — IDENTITY RESOLUTION + AEP ══════ -->
+<div id="view-2" class="view">
+  <div class="v2-layout">
+    <div class="v2-left">
+      <div class="v2-account-bar">
+        <div class="v2-ab-dot"></div>
+        <span class="v2-ab-text">Merkury — Account Resolved</span>
+        <span class="v2-ab-account">MedLink Distribution Co. · Nashville, TN</span>
+      </div>
+      <div class="v2-hero">
+        <div class="v2-chip"><div class="v2-chip-dot"></div><span class="v2-chip-text">Recognized: MedLink Distribution Co.</span></div>
+        <h1 class="v2-hero-h1">HelixCheck Pro pricing for your pharmacy network</h1>
+        <p class="v2-hero-sub">Based on your network's profile, you may qualify for GPO-tier pricing on HelixCheck Pro. Talk to a specialist — no commitment required.</p>
+        <div class="v2-hero-btns">
+          <button class="btn-v2-p" onclick="return false;">Request Network Pricing</button>
+          <button class="btn-v2-o" onclick="return false;">View HelixCheck Pro →</button>
+        </div>
+      </div>
+      <div class="v2-content">
+        <div class="v2-rec-label">Recommended based on your browsing activity</div>
+        <div class="v2-prod-row">
+          <div class="v2-mini-card highlighted"><div class="v2-mini-icon">🧬</div><div class="v2-mini-name">HelixCheck Pro</div><div class="v2-mini-tag">↑ 7 page views</div></div>
+          <div class="v2-mini-card"><div class="v2-mini-icon">💲</div><div class="v2-mini-name">GPO Pricing</div><div class="v2-mini-tag">↑ 3 visits</div></div>
+          <div class="v2-mini-card"><div class="v2-mini-icon">📋</div><div class="v2-mini-name">Contact Us</div><div class="v2-mini-tag">↑ 2 visits</div></div>
+        </div>
+        <div class="v2-callout">
+          <div class="v2-callout-label">What Merkury surfaced — no login required</div>
+          <div class="v2-callout-text">MedLink Distribution Co. was identified at the account level using Merkury's B2B identity graph. No form fill, no authentication. Firmographic signals and browsing behavior were appended in real time, triggering this personalized experience before any individual raised their hand.</div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-right">
+      <div class="aep-panel">
+        <div class="aep-header">
+          <div class="aep-logo-mark">A</div>
+          <div><div class="aep-logo-name">Adobe Experience Platform</div><div class="aep-logo-sub">Real-Time CDP · B2B Edition</div></div>
+          <div class="aep-live-badge"><div class="aep-live-dot"></div>Live</div>
+        </div>
+        <div class="aep-body">
+          <div class="aep-sec">Account Profile — Building Live</div>
+          <div class="aep-account-card">
+            <div class="aep-account-name">MedLink Distribution Co.</div>
+            <div class="aep-account-id" id="aep-dentsu-id">dentsu.id: resolving...</div>
+            <div class="aep-account-id" id="aep-ecid" style="margin-top:2px;">ecid: resolving...</div>
+            <div class="aep-chips">
+              <span class="aep-chip aep-chip-acct">Account Match</span>
+              <span class="aep-chip aep-chip-anon">No Individual ID</span>
+              <span class="aep-chip aep-chip-intent">Intent Signal</span>
+            </div>
+          </div>
+          <div class="aep-sec" style="margin-top:12px;">Intent Score</div>
+          <div class="aep-intent-block">
+            <div class="aep-intent-row">
+              <span class="aep-intent-label">Buying Intent Score</span>
+              <div class="aep-intent-score"><span id="aep-score-num">52</span><span>/100</span></div>
+            </div>
+            <div class="aep-bar-wrap"><div class="aep-bar" id="aep-score-bar" style="width:52%;"></div></div>
+            <div class="aep-threshold" id="aep-threshold-txt">Threshold: 80 → Journey trigger</div>
+          </div>
+          <div class="aep-sec" style="margin-top:12px;">Session Signals</div>
+          <div class="aep-session-block">
+            <div class="aep-session-row"><span class="aep-session-label">Visit Count</span><span class="aep-session-val" id="aep-visit-count">—</span></div>
+            <div class="aep-session-row"><span class="aep-session-label">Product Interest</span><span class="aep-session-val" style="font-size:12px;" id="aep-product-interest">—</span></div>
+            <div class="aep-pages" id="aep-pages"></div>
+          </div>
+          <div class="aep-sec" style="margin-top:12px;">Firmographic Data</div>
+          <div id="aep-firmo-fields"></div>
+          <div class="aep-sec" style="margin-top:12px;">Individual Identity</div>
+          <div class="aep-field-row"><span class="aep-field-key">first_name</span><span class="aep-field-val aep-field-null">null — anonymous</span></div>
+          <div class="aep-field-row"><span class="aep-field-key">last_name</span><span class="aep-field-val aep-field-null">null — anonymous</span></div>
+          <div class="aep-field-row"><span class="aep-field-key">email_addr</span><span class="aep-field-val aep-field-null">null — anonymous</span></div>
+          <div class="aep-next" id="aep-next" style="display:none;">
+            <div class="aep-next-label">⚡ Next Step</div>
+            <div class="aep-next-text">Intent score crossing 80 — AJO B2B threshold met</div>
+            <div class="aep-next-sub">MedLink will be enrolled in the HelixCheck Distributor Nurture journey</div>
+          </div>
+        </div>
+        <button class="btn-advance" id="btn-advance" onclick="goToView(3)" disabled>View AJO Journey Trigger →</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /view-2 -->
+
+<!-- ══════ VIEW 3 — AJO B2B + MARKETO ══════ -->
+<div id="view-3" class="view">
+  <div class="v3-layout">
+    <div class="v3-left">
+      <div class="ajo-header">
+        <div class="ajo-logo-mark">AJ</div>
+        <div><div class="ajo-logo-name">Adobe Journey Optimizer B2B</div><div class="ajo-logo-sub">Account Journey — Live Enrollment</div></div>
+        <div class="ajo-trigger-badge"><div class="ajo-trigger-dot"></div>Triggered</div>
+      </div>
+      <div class="ajo-body">
+        <div class="ajo-journey-title">HelixCheck Distributor — Intent Nurture Journey</div>
+        <div class="ajo-journey-sub">Triggered when account intent_score ≥ 80 · Merkury account signal source</div>
+        <div class="ajo-node"><div class="ajo-dot trigger active">⚡</div><div class="ajo-info"><div class="ajo-info-label">Entry Trigger</div><div class="ajo-info-detail">Merkury account signal — intent_score ≥ 80</div><div class="ajo-info-chip">MedLink Distribution Co. enrolled</div></div></div>
+        <div class="ajo-connector active"></div>
+        <div class="ajo-node"><div class="ajo-dot condition">≥</div><div class="ajo-info"><div class="ajo-info-label">Condition: Account Score</div><div class="ajo-info-detail">intent_score ≥ 80 AND product_interest = HelixCheck Pro</div><div class="ajo-info-chip blue">TRUE → Fast Track</div></div></div>
+        <div class="ajo-connector active"></div>
+        <div class="ajo-node"><div class="ajo-dot action">✉</div><div class="ajo-info"><div class="ajo-info-label">Action: Send to Marketo</div><div class="ajo-info-detail">Push account to Marketo Smart Campaign — Distributor High Intent</div><div class="ajo-info-chip green">Fired · 0.3s ago</div></div></div>
+        <div class="ajo-connector"></div>
+        <div class="ajo-node" style="opacity:.45;"><div class="ajo-dot action">📞</div><div class="ajo-info"><div class="ajo-info-label">Action: Sales Alert</div><div class="ajo-info-detail">Notify distribution rep — Sarah Tillman queue</div><div class="ajo-info-chip" style="opacity:.6;">Queued — 24h</div></div></div>
+        <div class="ajo-connector"></div>
+        <div class="ajo-node" style="opacity:.35;"><div class="ajo-dot condition">⏱</div><div class="ajo-info"><div class="ajo-info-label">Wait — 3 Days</div><div class="ajo-info-detail">Check for inbound form fill or pricing page revisit</div></div></div>
+        <div class="ajo-enrolled">
+          <div class="ajo-enr-label">Account Enrolled</div>
+          <div class="ajo-enr-name">MedLink Distribution Co.</div>
+          <div class="ajo-enr-detail">Nashville, TN · NAICS 424210 · $480M revenue · 3,200 employees</div>
+          <div class="ajo-enr-score-row">
+            <div class="ajo-enr-score">83</div>
+            <div class="ajo-enr-label2">intent score at enrollment</div>
+            <div class="ajo-enr-badge">↑ Threshold crossed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v3-right">
+      <div class="mk-header">
+        <div class="mk-logo-mark">M</div>
+        <div><div class="mk-logo-name">Marketo Engage</div><div class="mk-logo-sub">Smart Campaign · Triggered</div></div>
+        <div class="mk-fired-badge"><div class="mk-fired-dot"></div>Program Fired</div>
+      </div>
+      <div class="mk-body">
+        <div class="mk-sec-title" style="margin-top:0;">Smart Campaign — Active</div>
+        <div class="mk-program-card active">
+          <div class="mk-prog-name">Distributor High Intent — HelixCheck Pro</div>
+          <div class="mk-prog-type">Email Nurture · B2B · Account-Based</div>
+          <div class="mk-prog-status"><div class="mk-dot active"></div><span class="mk-status-txt">Email 1 of 3 — Queued to send</span></div>
+        </div>
+        <div class="mk-program-card">
+          <div class="mk-prog-name">Distributor General Interest</div>
+          <div class="mk-prog-type">Email Nurture · B2B</div>
+          <div class="mk-prog-status"><div class="mk-dot waiting"></div><span class="mk-status-txt" style="color:#aaa;">Suppressed — higher-priority campaign active</span></div>
+        </div>
+        <div class="mk-sec-title" style="margin-top:16px;">Smart List — Trigger Filters</div>
+        <div class="mk-smart-list">
+          <div class="mk-sl-title">Entry Criteria</div>
+          <div class="mk-filter"><span class="mk-fk">intent_score</span><span class="mk-fo">&nbsp;is at least&nbsp;</span><span class="mk-fv">80</span></div>
+          <div class="mk-filter"><span class="mk-fk">product_interest</span><span class="mk-fo">&nbsp;contains&nbsp;</span><span class="mk-fv">HelixCheck Pro</span></div>
+          <div class="mk-filter"><span class="mk-fk">match_type</span><span class="mk-fo">&nbsp;is&nbsp;</span><span class="mk-fv">account</span></div>
+          <div class="mk-filter"><span class="mk-fk">naics_code</span><span class="mk-fo">&nbsp;starts with&nbsp;</span><span class="mk-fv">424 (Drug Distribution)</span></div>
+        </div>
+        <div class="mk-sec-title" style="margin-top:16px;">Email 1 — Preview</div>
+        <div class="mk-email">
+          <div class="mk-email-hdr">
+            <div class="mk-email-from">From: Sarah Tillman, HelixHealth Distribution · sarah.tillman@helixhealth.com</div>
+            <div class="mk-email-subj">HelixCheck Pro pricing for your pharmacy network — let's talk</div>
+          </div>
+          <div class="mk-email-body">
+            <div class="mk-email-greeting">Hi,</div>
+            <div class="mk-email-txt">I noticed your team has been exploring HelixCheck Pro for your pharmacy network — I'd love to share what we're doing with GPO partners at similar scale.<br><br>We have network-tier pricing available for qualified distributors, and I can walk you through the clinical data and ordering process in under 20 minutes.</div>
+            <a class="mk-email-cta" href="#" onclick="return false;">Schedule a Call →</a>
+          </div>
+          <div class="mk-email-merkury">
+            <span class="mk-merkury-label">Merkury signals</span>
+            <span class="mk-merkury-pill"><span>company:</span> MedLink</span>
+            <span class="mk-merkury-pill"><span>intent_score:</span> 83</span>
+            <span class="mk-merkury-pill"><span>product:</span> HelixCheck Pro</span>
+            <span class="mk-merkury-pill"><span>visits:</span> 7</span>
+          </div>
+        </div>
+        <div class="mk-loop-close">
+          <div class="mk-loop-label">The loop closes — no form fill required</div>
+          <div class="mk-loop-txt">Merkury identified MedLink at the account level from anonymous signal. AJO B2B detected the intent threshold crossing and enrolled the account. Marketo fired a personalized outreach — all before anyone at MedLink submitted a form or logged in.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /view-3 -->
+
+<!-- PERSONA SWITCHER -->
+<div id="persona-switcher">
+  <div id="ps-toggle" onclick="toggleSwitcher()">
+    <div class="ps-dot"></div>
+    <span>Demo Persona</span>
+    <span class="ps-chevron">&#9662;</span>
+  </div>
+  <div id="ps-panel">
+    <div class="ps-hdr">
+      <div class="ps-hdr-left"><h3>Merkury Demo Switcher</h3><p>HelixHealth · Adobe Summit 2026</p></div>
+      <span class="ps-badge">Live</span>
+    </div>
+    <div class="ps-active-bar"><div class="ps-active-dot"></div>Active: <strong id="ps-active-name">Default</strong></div>
+    <div class="ps-section-label">Select Persona / View</div>
+    <div class="ps-persona-list" id="ps-persona-list"></div>
+    <div class="ps-footer">
+      <span class="ps-reset" onclick="resetDemo()">↺ Reset demo</span>
+      <span class="ps-view-ind">View: <strong id="ps-view-name">Home</strong></span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ SAFE CONSOLE SHIM ═══════════════════════════
+(function(){var noop=function(){};var m=['log','warn','error','info','group','groupCollapsed','groupEnd','table','dir'];if(typeof console==='undefined'){window.console={};}m.forEach(function(x){if(typeof console[x]!=='function'){console[x]=noop;}});})();
+
+// ══ LINK INTERCEPTOR ════════════════════════════
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h||h==='#'||h===''||h.startsWith('javascript')){var oc=a.getAttribute('onclick')||'';if(oc.indexOf('goToView')!==-1||oc.indexOf('triggerResolve')!==-1||oc.indexOf('scrollIntoView')!==-1){return;}e.preventDefault();return false;}},true);
+
+// ══ MERKURY PAYLOADS ════════════════════════════
+var MERKURY_PAYLOADS = {
+  default:{d:{data:{},response:'no_match',version:'1.0.0'}},
+  medlink:{d:{data:{
+    'dentsu.id':'b7e3a1f2c4d5e6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0b1',
+    ecid:'38471920564738291047382910473829',
+    confidence_score:5, match_type:'account',
+    first_name:null, last_name:null, email_addr:null, email_confidence_level:null,
+    company_name:'MedLink Distribution Co.', company_url:'medlinkdistribution.com',
+    org_name:'MedLink Distribution Co. LLC', city:'Nashville', state:'TN',
+    naics_code:'424210', sic_code_2:'51',
+    employee_size_range_corporate:'I', employee_size_actual_corporate:'3200',
+    sales_volume_range_corporate:'I', sales_volume_actual_corporate:'480000000',
+    business_lifecycle:'M', business_type:'L', public_private_flag:'B',
+    fortune_500_flag:'N', franchise_code:'H', worthiness_code:'A', soho_flag:'N',
+    intent_score:83, visit_count:7,
+    pages_visited:['pricing','contact','helix-check-pro'],
+    product_interest:'HelixCheck Pro', last_visit_date:'2026-03-17',
+    created_date:'2024-06-12 00:00:00', last_modified_date:'2026-03-17 00:00:00'
+  },response:'match',version:'1.0.0'}},
+  sarah_tillman:{d:{data:{
+    'dentsu.id':'c2f4a6b8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4',
+    ecid:'29384756102938475610293847561029',
+    confidence_score:1, match_type:'deterministic',
+    first_name:'Sarah', last_name:'Tillman', email_addr:'sarah.tillman@helixhealth.com',
+    email_confidence_level:'1', job_title:'Demand Generation Manager',
+    job_level_standard:'Manager', job_function_standard:'Marketing',
+    primary_site_contact:'true', campaign_usage:'Multi-Channel',
+    company_name:'HelixHealth Inc.', company_url:'helixhealth.com',
+    org_name:'HelixHealth Inc.', city:'Boston', state:'MA',
+    naics_code:'325413', sic_code_2:'28',
+    employee_size_range_corporate:'H', employee_size_actual_corporate:'1400',
+    sales_volume_range_corporate:'H', sales_volume_actual_corporate:'210000000',
+    business_lifecycle:'G', business_type:'Y', public_private_flag:'B',
+    fortune_500_flag:'N', franchise_code:'H', worthiness_code:'A', soho_flag:'N',
+    intent_score:null, visit_count:null, pages_visited:null,
+    product_interest:null, last_visit_date:null,
+    created_date:'2023-01-15 00:00:00', last_modified_date:'2026-03-18 00:00:00'
+  },response:'match',version:'1.0.0'}}
+};
+
+var PERSONAS=[
+  {key:'default',       name:'Anonymous Visitor', title:'No identity — prospect browsing',             avatar:'👤',bg:'#f4f7fa'},
+  {key:'medlink',       name:'MedLink Dist. Co.', title:'Prospect — Account-level only · Nashville, TN',avatar:'🏭',bg:'#e6f4f8'},
+  {key:'sarah_tillman', name:'Sarah Tillman',     title:'Demand Gen Manager — HelixHealth (internal)', avatar:'📊',bg:'#edf8f0'}
+];
+
+// ══ STATE ════════════════════════════════════════
+var activePersonaKey='default', activeView=1, panelOpen=false, idPanelOpen=false;
+var resolveAnimDone=false, sessionId=Math.random().toString(36).substr(2,9).toUpperCase();
+window._svq=window._svq||[]; window._merkuryPersona='default';
+
+// ══ MERKURY RESOLVE ENGINE ══════════════════════
+function merkuryResolve(personaKey){
+  personaKey=personaKey||'default';
+  window._merkuryPersona=personaKey;
+  var latency=280+Math.floor(Math.random()*180), now=Date.now();
+  setTimeout(function(){
+    var payload=MERKURY_PAYLOADS[personaKey]||MERKURY_PAYLOADS['default'];
+    var resolved={d:{data:Object.assign({},payload.d.data),response:payload.d.response,version:payload.d.version},t:now,e:now+latency};
+    window.merkuryData=resolved;
+    var isMatch=resolved.d.response==='match', d=isMatch?resolved.d.data:null;
+    window._svdatalayer=null;
+    if(isMatch){
+      window._svdatalayer={
+        'dentsu.id':d['dentsu.id'],ecid:d.ecid,confidence_score:d.confidence_score,match_type:d.match_type,
+        first_name:d.first_name,last_name:d.last_name,email_addr:d.email_addr,email_confidence_level:d.email_confidence_level,
+        company_name:d.company_name,company_url:d.company_url,org_name:d.org_name,city:d.city,state:d.state,
+        naics_code:d.naics_code,sic_code_2:d.sic_code_2,
+        employee_size_range_corporate:d.employee_size_range_corporate,employee_size_actual_corporate:d.employee_size_actual_corporate,
+        sales_volume_range_corporate:d.sales_volume_range_corporate,sales_volume_actual_corporate:d.sales_volume_actual_corporate,
+        business_lifecycle:d.business_lifecycle,business_type:d.business_type,public_private_flag:d.public_private_flag,
+        fortune_500_flag:d.fortune_500_flag,franchise_code:d.franchise_code,worthiness_code:d.worthiness_code,soho_flag:d.soho_flag,
+        intent_score:d.intent_score,visit_count:d.visit_count,pages_visited:d.pages_visited,
+        product_interest:d.product_interest,last_visit_date:d.last_visit_date,
+        created_date:d.created_date,last_modified_date:d.last_modified_date,_t:resolved.t,_e:resolved.e
+      };
+    }
+    window._svq.push(['_identityResolved',{company_name:isMatch?d.company_name:null,confidence_score:isMatch?d.confidence_score:null,response:resolved.d.response}]);
+    document.dispatchEvent(new CustomEvent('merkury:resolved',{detail:resolved}));
+    updateIdPanel(personaKey);
+  },latency);
+}
+
+// ══ IDENTITY SAMPLE PANEL ═══════════════════════
+function toggleIdPanel(){
+  idPanelOpen=!idPanelOpen;
+  document.getElementById('id-panel').classList.toggle('open',idPanelOpen);
+}
+function closeIdPanel(){idPanelOpen=false;document.getElementById('id-panel').classList.remove('open');}
+
+function updateIdPanel(key){
+  var body=document.getElementById('idp-body');
+  var resolveBar=document.getElementById('idp-resolve-bar');
+  var resolveMs=document.getElementById('idp-resolve-ms');
+  if(!body)return;
+  var payload=MERKURY_PAYLOADS[key];
+  var d=(payload&&payload.d.response==='match')?payload.d.data:null;
+  if(!d){
+    body.innerHTML='<div class="idp-empty">Select a persona to see live Merkury tag data.</div>';
+    if(resolveBar)resolveBar.style.display='none';
+    return;
+  }
+  function fmt(v){
+    if(v===null||v===undefined)return{text:'null',cls:'idp-val-null'};
+    if(typeof v==='number')return{text:String(v),cls:'idp-val-num'};
+    if(Array.isArray(v))return{text:"'"+v.join(', ')+"'",cls:'idp-val-str'};
+    return{text:"'"+v+"'",cls:'idp-val-str'};
+  }
+  function row(lbl,val){var f=fmt(val);return '<div class="idp-signal"><span class="idp-key">'+lbl+'</span><span class="idp-colon">:</span><span class="'+f.cls+'">'+f.text+'</span></div>';}
+  function obfuscate(val,len){
+    if(val===null||val===undefined)return null;
+    var chars='abcdef0123456789',out='',seed=0;
+    var s=String(val);for(var i=0;i<s.length;i++)seed=(seed*31+s.charCodeAt(i))&0xffffffff;
+    for(var j=0;j<(len||s.length);j++){seed=(seed*1664525+1013904223)&0xffffffff;out+=chars[(seed>>>0)%chars.length];}
+    return out;
+  }
+  function rowObf(lbl,val,len){
+    var obf=obfuscate(val,len);
+    if(obf===null)return row(lbl,null);
+    return '<div class="idp-signal"><span class="idp-key">'+lbl+'</span><span class="idp-colon">:</span><span class="idp-val-str">\''+obf+'\'</span><span class="idp-obf">obfuscated</span></div>';
+  }
+  var idSection='<div class="idp-card"><div class="idp-card-title">Identity Resolution</div>'+
+    rowObf('dentsu.id',d['dentsu.id'],32)+
+    row('ecid',d.ecid)+
+    row('confidence_score',d.confidence_score)+
+    row('match_type',d.match_type)+
+    row('first_name',d.first_name)+
+    row('last_name',d.last_name)+
+    rowObf('email_addr',d.email_addr,32)+'</div>';
+  var companySection='<div class="idp-card company" style="margin-top:10px;"><div class="idp-card-title">Company</div>'+
+    row('company_name',d.company_name)+
+    row('company_url',d.company_url)+
+    row('city',d.city)+
+    row('state',d.state)+'</div>';
+  var firmoSection='<div class="idp-card firmographic" style="margin-top:10px;"><div class="idp-card-title">Firmographic</div>'+
+    row('naics_code',d.naics_code)+
+    row('employee_size_actual',d.employee_size_actual_corporate)+
+    row('sales_volume_actual','$'+(Number(d.sales_volume_actual_corporate)/1000000).toFixed(0)+'M')+
+    row('business_lifecycle',d.business_lifecycle)+
+    row('public_private_flag',d.public_private_flag)+
+    row('worthiness_code',d.worthiness_code)+'</div>';
+  var intentSection='';
+  if(d.intent_score!==null&&d.intent_score!==undefined){
+    intentSection='<div class="idp-card intent" style="margin-top:10px;"><div class="idp-card-title">Intent Signals</div>'+
+      row('intent_score',d.intent_score)+
+      row('visit_count',d.visit_count)+
+      row('product_interest',d.product_interest)+
+      row('pages_visited',d.pages_visited)+
+      row('last_visit_date',d.last_visit_date)+'</div>';
+  }
+  body.innerHTML=idSection+companySection+firmoSection+intentSection;
+  if(resolveBar&&resolveMs){
+    resolveBar.style.display='none';
+    var ms=key==='medlink'?178:key==='sarah_tillman'?98:95+Math.floor(Math.random()*80);
+    setTimeout(function(){resolveMs.textContent=ms+'ms';resolveBar.style.display='flex';},ms);
+  }
+}
+
+// ══ VIEW MANAGEMENT ═════════════════════════════
+function goToView(n){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
+  var el=document.getElementById('view-'+n);
+  if(el)el.classList.add('active');
+  activeView=n;
+  window.scrollTo({top:0,behavior:'instant'});
+  updateViewIndicator();
+  window._svq.push(['_trackPageView']);
+}
+
+function applyPersonaAndResolve(key){
+  resetAEPPanel();
+  applyPersona(key);
+  setTimeout(function(){goToView(2);animateAEP(key);},350);
+}
+
+function triggerResolve(){
+  resetAEPPanel();
+  applyPersona('medlink');
+  setTimeout(function(){goToView(2);animateAEP('medlink');},350);
+}
+
+function resetAEPPanel(){
+  resolveAnimDone=false;
+  var scoreEl=document.getElementById('aep-score-num');
+  var barEl=document.getElementById('aep-score-bar');
+  var threshEl=document.getElementById('aep-threshold-txt');
+  var fEl=document.getElementById('aep-firmo-fields');
+  var vcEl=document.getElementById('aep-visit-count');
+  var piEl=document.getElementById('aep-product-interest');
+  var plEl=document.getElementById('aep-pages');
+  var nsEl=document.getElementById('aep-next');
+  var btnEl=document.getElementById('btn-advance');
+  var idEl=document.getElementById('aep-dentsu-id');
+  var ecEl=document.getElementById('aep-ecid');
+  var nameEl=document.getElementById('aep-account-name');
+  if(scoreEl)scoreEl.textContent='52';
+  if(barEl)barEl.style.width='52%';
+  if(threshEl){threshEl.textContent='Threshold: 80 → Journey trigger';threshEl.style.color='';}
+  if(fEl)fEl.innerHTML='';
+  if(vcEl)vcEl.textContent='—';
+  if(piEl)piEl.textContent='—';
+  if(plEl)plEl.innerHTML='';
+  if(nsEl)nsEl.style.display='none';
+  if(btnEl)btnEl.disabled=true;
+  if(idEl){idEl.textContent='dentsu.id: resolving...';idEl.style.color='';}
+  if(ecEl){ecEl.textContent='ecid: resolving...';ecEl.style.color='';}
+  if(nameEl)nameEl.textContent='Resolving...';
+}
+
+// ══ AEP PANEL ANIMATION ═════════════════════════
+function animateAEP(personaKey){
+  if(resolveAnimDone)return;
+  personaKey=personaKey||activePersonaKey;
+  var payload=MERKURY_PAYLOADS[personaKey]||MERKURY_PAYLOADS['medlink'];
+  var d=payload.d.data;
+
+  // Update account name
+  var nameEl=document.getElementById('aep-account-name');
+  if(nameEl)nameEl.textContent=d.company_name||'Unknown Account';
+
+  // Update account chips based on match type
+  var chipsEl=document.querySelector('#view-2 .aep-chips');
+  if(chipsEl){
+    if(personaKey==='medlink'){
+      chipsEl.innerHTML='<span class="aep-chip aep-chip-acct">Account Match</span><span class="aep-chip aep-chip-anon">No Individual ID</span><span class="aep-chip aep-chip-intent">Intent Signal</span>';
+    } else {
+      chipsEl.innerHTML='<span class="aep-chip aep-chip-acct">Individual Match</span><span class="aep-chip aep-chip-intent">Deterministic</span><span class="aep-chip" style="background:rgba(13,158,110,.15);color:#2dd4a0;border:1px solid rgba(13,158,110,.3);">Conf: '+d.confidence_score+'</span>';
+    }
+  }
+
+  // Update v2 personalized hero
+  var v2chip=document.querySelector('.v2-chip-text');
+  if(v2chip)v2chip.textContent='Recognized: '+(d.company_name||(d.first_name+' '+d.last_name));
+  var v2h1=document.querySelector('.v2-hero-h1');
+  if(v2h1){
+    if(personaKey==='sarah_tillman')v2h1.textContent='HelixHealth internal — MedLink signal received';
+    else v2h1.textContent='HelixCheck Pro pricing for your pharmacy network';
+  }
+  var v2sub=document.querySelector('.v2-hero-sub');
+  if(v2sub){
+    if(personaKey==='sarah_tillman')v2sub.textContent='Merkury has resolved an anonymous distributor visit to MedLink Distribution Co. — intent score 83. Marketo nurture sequence is queued.';
+    else v2sub.textContent='Based on your network\'s profile, you may qualify for GPO-tier pricing on HelixCheck Pro. Talk to a specialist — no commitment required.';
+  }
+
+  // Update v2 account bar
+  var abAccount=document.querySelector('.v2-ab-account');
+  if(abAccount){
+    if(personaKey==='sarah_tillman')abAccount.textContent='Sarah Tillman · HelixHealth (internal view)';
+    else abAccount.textContent='MedLink Distribution Co. · Nashville, TN';
+  }
+
+  setTimeout(function(){
+    var el=document.getElementById('aep-dentsu-id');if(el){el.textContent='dentsu.id: '+d['dentsu.id'].substr(0,28)+'...';el.style.color='rgba(0,194,184,.65)';}
+    var ec=document.getElementById('aep-ecid');if(ec){ec.textContent='ecid: '+d.ecid;ec.style.color='rgba(0,194,184,.65)';}
+  },400);
+  setTimeout(function(){var el=document.getElementById('aep-visit-count');if(el){el.textContent=d.visit_count;el.classList.add('popping');setTimeout(function(){el.classList.remove('popping');},800);}},600);
+  setTimeout(function(){var el=document.getElementById('aep-product-interest');if(el){el.textContent=d.product_interest;el.classList.add('popping');setTimeout(function(){el.classList.remove('popping');},800);}},800);
+  setTimeout(function(){
+    var pl=document.getElementById('aep-pages');
+    if(pl&&d.pages_visited){pl.innerHTML='';d.pages_visited.forEach(function(p,i){setTimeout(function(){var t=document.createElement('span');t.className='aep-page-tag'+(p==='helix-check-pro'||p==='pricing'?' hot':'');t.textContent='/'+p;pl.appendChild(t);},i*200);});}
+  },1000);
+  setTimeout(function(){
+    var el=document.getElementById('aep-firmo-fields');if(!el)return;
+    var naicLabel=d.naics_code==='424210'?d.naics_code+' — Drug Dist.':d.naics_code==='423450'?d.naics_code+' — Med Supply':d.naics_code;
+    var fields=[['company_name',d.company_name],['city / state',d.city+', '+d.state],['naics_code',naicLabel],['employees',Number(d.employee_size_actual_corporate).toLocaleString()],['revenue','$'+(Number(d.sales_volume_actual_corporate)/1000000).toFixed(0)+'M'],['worthiness_code','Excellent (A)']];
+    el.innerHTML='';
+    fields.forEach(function(f,i){setTimeout(function(){var r=document.createElement('div');r.className='aep-field-row';r.innerHTML='<span class="aep-field-key">'+f[0]+'</span><span class="aep-field-val popping">'+f[1]+'</span>';el.appendChild(r);setTimeout(function(){var v=r.querySelector('.popping');if(v)v.classList.remove('popping');},600);},i*160);});
+  },1200);
+  setTimeout(function(){
+    var scoreEl=document.getElementById('aep-score-num'),barEl=document.getElementById('aep-score-bar'),threshEl=document.getElementById('aep-threshold-txt');
+    var endScore=d.intent_score||83;
+    var startScore=Math.max(endScore-35,20);
+    var duration=2400,startTime=null;
+    function anim(ts){
+      if(!startTime)startTime=ts;
+      var prog=Math.min((ts-startTime)/duration,1),ease=1-Math.pow(1-prog,3),cur=Math.round(startScore+(endScore-startScore)*ease);
+      if(scoreEl)scoreEl.textContent=cur;
+      if(barEl)barEl.style.width=cur+'%';
+      if(cur>=80&&threshEl){threshEl.textContent='⚡ Threshold crossed — journey trigger firing';threshEl.style.color='#2dd4a0';}
+      if(prog<1){requestAnimationFrame(anim);}
+      else{
+        var ns=document.getElementById('aep-next');if(ns)ns.style.display='block';
+        var btn=document.getElementById('btn-advance');if(btn){btn.disabled=false;}
+      }
+    }
+    requestAnimationFrame(anim);
+  },1600);
+  resolveAnimDone=true;
+}
+
+// ══ PERSONA SWITCHER ════════════════════════════
+function buildPersonaList(){
+  var list=document.getElementById('ps-persona-list');if(!list)return;list.innerHTML='';
+  PERSONAS.forEach(function(p){
+    var el=document.createElement('div');el.className='ps-persona'+(p.key===activePersonaKey?' active':'');el.setAttribute('data-key',p.key);
+    el.innerHTML='<div class="ps-avatar" style="background:'+p.bg+'">'+p.avatar+'</div><div class="ps-info"><div class="ps-name">'+p.name+'</div><div class="ps-title">'+p.title+'</div></div><span class="ps-check">✓</span>';
+    el.addEventListener('click',function(){applyPersona(p.key);});
+    list.appendChild(el);
+  });
+}
+function toggleSwitcher(){panelOpen=!panelOpen;document.getElementById('ps-panel').classList.toggle('open',panelOpen);document.getElementById('ps-toggle').classList.toggle('open',panelOpen);updateViewIndicator();}
+document.addEventListener('click',function(e){if(!e.target.closest('#persona-switcher')){panelOpen=false;var p=document.getElementById('ps-panel'),t=document.getElementById('ps-toggle');if(p)p.classList.remove('open');if(t)t.classList.remove('open');}});
+function updateViewIndicator(){var labels={1:'Home — Tag Fires',2:'AEP Profile',3:'Journey Triggered'};var el=document.getElementById('ps-view-name');if(el)el.textContent=labels[activeView]||activeView;}
+function applyPersona(key){
+  activePersonaKey=key;
+  document.querySelectorAll('.ps-persona').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-key')===key);});
+  var p=PERSONAS.find(function(x){return x.key===key;})||PERSONAS[0];
+  var n=document.getElementById('ps-active-name');if(n)n.textContent=p.name;
+  window._merkuryPersona=key;merkuryResolve(key);
+  setTimeout(function(){panelOpen=false;var p2=document.getElementById('ps-panel'),t=document.getElementById('ps-toggle');if(p2)p2.classList.remove('open');if(t)t.classList.remove('open');},300);
+}
+function resetDemo(){
+  activePersonaKey='default';resolveAnimDone=false;sessionId=Math.random().toString(36).substr(2,9).toUpperCase();
+  var scoreEl=document.getElementById('aep-score-num'),barEl=document.getElementById('aep-score-bar'),threshEl=document.getElementById('aep-threshold-txt');
+  var fEl=document.getElementById('aep-firmo-fields'),vcEl=document.getElementById('aep-visit-count'),piEl=document.getElementById('aep-product-interest');
+  var plEl=document.getElementById('aep-pages'),nsEl=document.getElementById('aep-next'),btnEl=document.getElementById('btn-advance'),idEl=document.getElementById('aep-dentsu-id');
+  if(scoreEl)scoreEl.textContent='52';if(barEl)barEl.style.width='52%';
+  if(threshEl){threshEl.textContent='Threshold: 80 → Journey trigger';threshEl.style.color='';}
+  if(fEl)fEl.innerHTML='';if(vcEl)vcEl.textContent='—';if(piEl)piEl.textContent='—';if(plEl)plEl.innerHTML='';
+  if(nsEl)nsEl.style.display='none';if(btnEl)btnEl.disabled=true;
+  if(idEl){idEl.textContent='dentsu.id: resolving...';idEl.style.color='';}
+  buildPersonaList();goToView(1);merkuryResolve('default');
+  var n=document.getElementById('ps-active-name');if(n)n.textContent='Default';
+  panelOpen=false;var p=document.getElementById('ps-panel'),t=document.getElementById('ps-toggle');if(p)p.classList.remove('open');if(t)t.classList.remove('open');
+  updateIdPanel('default');
+}
+
+// ══ CONTACT FORM ════════════════════════════════
+function submitHxForm(){
+  var required=[['hf-fname','First name'],['hf-lname','Last name'],['hf-email','Email'],['hf-org','Organization']];
+  var ok=true;
+  required.forEach(function(r){
+    var el=document.getElementById(r[0]);if(!el)return;
+    if(!el.value.trim()){el.classList.add('error');ok=false;}
+    else{el.classList.remove('error');}
+  });
+  var emailEl=document.getElementById('hf-email');
+  if(emailEl&&emailEl.value.trim()&&!emailEl.value.includes('@')){emailEl.classList.add('error');ok=false;}
+  if(!ok)return;
+  document.getElementById('hx-form-fields').style.display='none';
+  document.getElementById('hx-form-success').style.display='block';
+}
+
+// ══ INIT ════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',function(){
+  buildPersonaList();updateViewIndicator();
+  setTimeout(function(){merkuryResolve('default');},120);
+});
+</script>
+</body>
+</html>
