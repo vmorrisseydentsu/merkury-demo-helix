@@ -282,6 +282,17 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
 /* ── VIEW 2 — SPLIT: PERSONALIZED + AEP ─────────────── */
 .v2-layout{display:grid;grid-template-columns:1fr 420px;min-height:calc(100vh - 130px);}
 .v2-left{border-right:1px solid var(--hx-border);overflow-y:auto;}
+/* ── V2 BEFORE/AFTER TOGGLE ─────────────────────── */
+.v2-toggle-bar{display:flex;align-items:center;gap:6px;padding:10px 16px;background:#f8f9fb;border-bottom:1px solid var(--hx-border);position:sticky;top:0;z-index:10;}
+.v2-toggle-btn{display:flex;align-items:center;gap:7px;font-family:var(--font);font-size:12px;font-weight:700;padding:7px 14px;border-radius:4px;cursor:pointer;border:1.5px solid var(--hx-border);background:#fff;color:var(--hx-text3);transition:all .15s;}
+.v2-toggle-btn.active{background:var(--merkury-navy);color:#fff;border-color:var(--merkury-navy);}
+.v2-toggle-btn:hover:not(.active){border-color:var(--hx-teal);color:var(--hx-navy);}
+.v2-toggle-indicator{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.v2-ind-before{background:#b0c4d0;}
+.v2-toggle-btn.active .v2-ind-before{background:rgba(255,255,255,.4);}
+.v2-ind-after{background:var(--merkury-teal);}
+.v2-toggle-btn:not(.active) .v2-ind-after{background:var(--hx-teal);}
+.v2-toggle-label{font-size:11px;color:var(--hx-text3);margin-left:8px;font-style:italic;}
 .v2-right{background:var(--merkury-navy);overflow-y:auto;}
 .v2-account-bar{background:#071428;padding:9px 28px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.06);}
 .v2-ab-dot{width:7px;height:7px;border-radius:50%;background:var(--merkury-teal);animation:pulse 1.8s ease-in-out infinite;}
@@ -802,30 +813,70 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
 <div id="view-2" class="view">
   <div class="v2-layout">
     <div class="v2-left">
-      <div class="v2-account-bar">
-        <div class="v2-ab-dot"></div>
-        <span class="v2-ab-text">Merkury — Account Resolved</span>
-        <span class="v2-ab-account">MedLink Distribution Co. · Nashville, TN</span>
+      <!-- BEFORE/AFTER TOGGLE BAR -->
+      <div class="v2-toggle-bar">
+        <button class="v2-toggle-btn active" id="v2-btn-before" onclick="setV2State('before')">
+          <span class="v2-toggle-indicator v2-ind-before"></span>
+          Before Merkury
+        </button>
+        <button class="v2-toggle-btn" id="v2-btn-after" onclick="setV2State('after')">
+          <span class="v2-toggle-indicator v2-ind-after"></span>
+          After Resolution
+        </button>
+        <span class="v2-toggle-label" id="v2-toggle-label">Anonymous visitor — no identity</span>
       </div>
-      <div class="v2-hero">
-        <div class="v2-chip"><div class="v2-chip-dot"></div><span class="v2-chip-text">Recognized: MedLink Distribution Co.</span></div>
-        <h1 class="v2-hero-h1">HelixCheck Pro pricing for your pharmacy network</h1>
-        <p class="v2-hero-sub">Based on your network's profile, you may qualify for GPO-tier pricing on HelixCheck Pro. Talk to a specialist — no commitment required.</p>
-        <div class="v2-hero-btns">
-          <button class="btn-v2-p" onclick="return false;">Request Network Pricing</button>
-          <button class="btn-v2-o" onclick="return false;">View HelixCheck Pro →</button>
+
+      <!-- BEFORE STATE: generic anonymous page -->
+      <div id="v2-state-before">
+        <div class="v2-hero" style="background:linear-gradient(135deg,#071e34 0%,#0a3a52 45%,#0a6e8a 100%);">
+          <h1 class="v2-hero-h1" style="margin-top:8px;">Diagnostic solutions built for the demands of modern healthcare distribution</h1>
+          <p class="v2-hero-sub">HelixCheck test kits deliver clinical-grade accuracy across pharmacy networks, GPOs and health system distribution partners.</p>
+          <div class="v2-hero-btns">
+            <button class="btn-v2-p" onclick="return false;">Request Network Pricing</button>
+            <button class="btn-v2-o" onclick="return false;">View Clinical Evidence →</button>
+          </div>
+        </div>
+        <div class="v2-content">
+          <div class="v2-rec-label" style="color:var(--hx-text3);">Featured products</div>
+          <div class="v2-prod-row">
+            <div class="v2-mini-card"><div class="v2-mini-icon">🧬</div><div class="v2-mini-name">HelixCheck Pro</div><div class="v2-mini-tag" style="color:var(--hx-text3);">Respiratory Panel</div></div>
+            <div class="v2-mini-card"><div class="v2-mini-icon">⚡</div><div class="v2-mini-name">HelixCheck Rapid</div><div class="v2-mini-tag" style="color:var(--hx-text3);">Flu A/B + COVID</div></div>
+            <div class="v2-mini-card"><div class="v2-mini-icon">🔬</div><div class="v2-mini-name">HelixCheck Combo</div><div class="v2-mini-tag" style="color:var(--hx-text3);">10-panel STI</div></div>
+          </div>
+          <div class="v2-callout" style="background:#f8f8f6;border-color:var(--hx-border);">
+            <div class="v2-callout-label" style="color:var(--hx-text3);">Visitor status</div>
+            <div class="v2-callout-text" style="color:var(--hx-text3);">Anonymous session — no identity resolved. MedLink Distribution Co. has visited 7 times in 14 days. To HelixHealth's marketing team, they are invisible. No CRM record. No outreach triggered.</div>
+          </div>
         </div>
       </div>
-      <div class="v2-content">
-        <div class="v2-rec-label">Recommended based on your browsing activity</div>
-        <div class="v2-prod-row">
-          <div class="v2-mini-card highlighted"><div class="v2-mini-icon">🧬</div><div class="v2-mini-name">HelixCheck Pro</div><div class="v2-mini-tag">↑ 7 page views</div></div>
-          <div class="v2-mini-card"><div class="v2-mini-icon">💲</div><div class="v2-mini-name">GPO Pricing</div><div class="v2-mini-tag">↑ 3 visits</div></div>
-          <div class="v2-mini-card"><div class="v2-mini-icon">📋</div><div class="v2-mini-name">Contact Us</div><div class="v2-mini-tag">↑ 2 visits</div></div>
+
+      <!-- AFTER STATE: personalized resolved page -->
+      <div id="v2-state-after" style="display:none;">
+        <div class="v2-account-bar">
+          <div class="v2-ab-dot"></div>
+          <span class="v2-ab-text">Merkury — Account Resolved</span>
+          <span class="v2-ab-account" id="v2-ab-account-txt">MedLink Distribution Co. · Nashville, TN</span>
         </div>
-        <div class="v2-callout">
-          <div class="v2-callout-label">What Merkury surfaced — no login required</div>
-          <div class="v2-callout-text">MedLink Distribution Co. was identified at the account level using Merkury's B2B identity graph. No form fill, no authentication. Firmographic signals and browsing behavior were appended in real time, triggering this personalized experience before any individual raised their hand.</div>
+        <div class="v2-hero">
+          <div class="v2-chip"><div class="v2-chip-dot"></div><span class="v2-chip-text" id="v2-chip-txt">Recognized: MedLink Distribution Co.</span></div>
+          <h1 class="v2-hero-h1" id="v2-hero-h1-txt">HelixCheck Pro pricing for your pharmacy network</h1>
+          <p class="v2-hero-sub" id="v2-hero-sub-txt">Based on your network's profile, you may qualify for GPO-tier pricing on HelixCheck Pro. Talk to a specialist — no commitment required.</p>
+          <div class="v2-hero-btns">
+            <button class="btn-v2-p" onclick="return false;">Request Network Pricing</button>
+            <button class="btn-v2-o" onclick="return false;">View HelixCheck Pro →</button>
+          </div>
+        </div>
+        <div class="v2-content">
+          <div class="v2-rec-label">Recommended based on your browsing activity</div>
+          <div class="v2-prod-row">
+            <div class="v2-mini-card highlighted"><div class="v2-mini-icon">🧬</div><div class="v2-mini-name">HelixCheck Pro</div><div class="v2-mini-tag">↑ 7 page views</div></div>
+            <div class="v2-mini-card"><div class="v2-mini-icon">💲</div><div class="v2-mini-name">GPO Pricing</div><div class="v2-mini-tag">↑ 3 visits</div></div>
+            <div class="v2-mini-card"><div class="v2-mini-icon">📋</div><div class="v2-mini-name">Contact Us</div><div class="v2-mini-tag">↑ 2 visits</div></div>
+          </div>
+          <div class="v2-callout">
+            <div class="v2-callout-label">What Merkury surfaced — no login required</div>
+            <div class="v2-callout-text">MedLink Distribution Co. was identified at the account level using Merkury's B2B identity graph. No form fill, no authentication. Firmographic signals and browsing behavior were appended in real time, triggering this personalized experience before any individual raised their hand.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1179,6 +1230,27 @@ function triggerResolve(){
   setTimeout(function(){goToView(2);animateAEP('medlink');},350);
 }
 
+function setV2State(state){
+  var before=document.getElementById('v2-state-before');
+  var after=document.getElementById('v2-state-after');
+  var btnBefore=document.getElementById('v2-btn-before');
+  var btnAfter=document.getElementById('v2-btn-after');
+  var label=document.getElementById('v2-toggle-label');
+  if(state==='before'){
+    if(before)before.style.display='block';
+    if(after)after.style.display='none';
+    if(btnBefore)btnBefore.classList.add('active');
+    if(btnAfter)btnAfter.classList.remove('active');
+    if(label)label.textContent='Anonymous visitor — no identity';
+  } else {
+    if(before)before.style.display='none';
+    if(after)after.style.display='block';
+    if(btnBefore)btnBefore.classList.remove('active');
+    if(btnAfter)btnAfter.classList.add('active');
+    if(label)label.textContent='Merkury resolved — personalized experience active';
+  }
+}
+
 function resetAEPPanel(){
   resolveAnimDone=false;
   var scoreEl=document.getElementById('aep-score-num');
@@ -1205,6 +1277,7 @@ function resetAEPPanel(){
   if(idEl){idEl.textContent='dentsu.id: resolving...';idEl.style.color='';}
   if(ecEl){ecEl.textContent='ecid: resolving...';ecEl.style.color='';}
   if(nameEl)nameEl.textContent='Resolving...';
+  setV2State('before');
 }
 
 // ══ AEP PANEL ANIMATION ═════════════════════════
@@ -1248,6 +1321,17 @@ function animateAEP(personaKey){
     if(personaKey==='sarah_tillman')abAccount.textContent='Sarah Tillman · HelixHealth (internal view)';
     else abAccount.textContent='MedLink Distribution Co. · Nashville, TN';
   }
+
+  // Switch left panel to "after" personalized state and update IDs
+  setV2State('after');
+  var chipTxt=document.getElementById('v2-chip-txt');
+  if(chipTxt)chipTxt.textContent='Recognized: '+(d.company_name||(d.first_name+' '+d.last_name));
+  var abTxt=document.getElementById('v2-ab-account-txt');
+  if(abTxt){if(personaKey==='sarah_tillman')abTxt.textContent='Sarah Tillman · HelixHealth (internal view)';else abTxt.textContent='MedLink Distribution Co. · Nashville, TN';}
+  var v2h1=document.getElementById('v2-hero-h1-txt');
+  if(v2h1){if(personaKey==='sarah_tillman')v2h1.textContent='HelixHealth internal — MedLink signal received';else v2h1.textContent='HelixCheck Pro pricing for your pharmacy network';}
+  var v2sub=document.getElementById('v2-hero-sub-txt');
+  if(v2sub){if(personaKey==='sarah_tillman')v2sub.textContent='Merkury has resolved an anonymous distributor visit to MedLink Distribution Co. — intent score 83. Marketo nurture sequence is queued.';else v2sub.textContent="Based on your network's profile, you may qualify for GPO-tier pricing on HelixCheck Pro. Talk to a specialist — no commitment required.";}
 
   setTimeout(function(){
     var el=document.getElementById('aep-dentsu-id');if(el){el.textContent='dentsu.id: '+d['dentsu.id'].substr(0,28)+'...';el.style.color='rgba(0,194,184,.65)';}
