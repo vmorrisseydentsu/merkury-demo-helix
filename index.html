@@ -1182,8 +1182,14 @@ function goToView(n){
   if(el)el.classList.add('active');
   activeView=n;
   window.scrollTo({top:0,behavior:'instant'});
-  updateViewIndicator();
   window._svq.push(['_trackPageView']);
+}
+
+function applyPersona(key){
+  activePersonaKey=key;
+  window._merkuryPersona=key;
+  merkuryResolve(key);
+  updateIdPanel(key);
 }
 
 function applyPersonaAndResolve(key){
