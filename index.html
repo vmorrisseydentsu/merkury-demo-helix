@@ -443,38 +443,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
 .mk-loop-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hx-green);margin-bottom:4px;}
 .mk-loop-txt{font-size:11px;color:#2a5040;line-height:1.65;}
 
-/* ── PERSONA SWITCHER ────────────────────────────────── */
-#persona-switcher{position:fixed;bottom:24px;right:24px;z-index:9999;font-family:var(--font);}
-#ps-toggle{display:flex;align-items:center;gap:8px;background:var(--merkury-navy);color:#fff;padding:10px 16px;border-radius:24px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.35);border:2px solid var(--merkury-teal);user-select:none;transition:background .15s;}
-#ps-toggle:hover{background:#152a40;}
-#ps-toggle .ps-dot{width:7px;height:7px;border-radius:50%;background:var(--merkury-teal);animation:pulse 2s ease-in-out infinite;flex-shrink:0;}
-#ps-toggle .ps-chevron{font-size:9px;opacity:.7;transition:transform .2s;}
-#ps-toggle.open .ps-chevron{transform:rotate(180deg);}
-#ps-panel{display:none;position:absolute;bottom:calc(100% + 10px);right:0;background:#fff;border:1.5px solid var(--hx-border);border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.18);width:320px;overflow:hidden;}
-#ps-panel.open{display:block;}
-.ps-hdr{background:var(--merkury-navy);padding:13px 18px;display:flex;align-items:center;justify-content:space-between;}
-.ps-hdr-left h3{font-size:12px;font-weight:700;color:#fff;margin-bottom:2px;}
-.ps-hdr-left p{font-size:10px;color:rgba(255,255,255,.4);}
-.ps-badge{background:var(--merkury-teal);color:var(--merkury-navy);font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:3px;}
-.ps-active-bar{background:var(--hx-off);padding:8px 18px;border-bottom:1px solid var(--hx-border);font-size:10px;color:var(--hx-text3);display:flex;align-items:center;gap:7px;}
-.ps-active-bar strong{color:var(--hx-navy);font-size:11px;}
-.ps-active-dot{width:6px;height:6px;border-radius:50%;background:var(--merkury-teal);flex-shrink:0;}
-.ps-section-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--hx-text3);padding:9px 18px 3px;}
-.ps-persona-list{padding:0 10px 10px;}
-.ps-persona{display:flex;align-items:center;gap:10px;padding:9px;border-radius:6px;cursor:pointer;transition:background .12s;border:1.5px solid transparent;}
-.ps-persona:hover{background:var(--hx-off);}
-.ps-persona.active{background:#f0faf9;border-color:var(--merkury-teal);}
-.ps-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.ps-info{flex:1;min-width:0;}
-.ps-name{font-size:12px;font-weight:700;color:var(--hx-navy);}
-.ps-title{font-size:10px;color:var(--hx-text3);margin-top:1px;}
-.ps-check{font-size:13px;color:var(--merkury-teal);opacity:0;transition:opacity .15s;}
-.ps-persona.active .ps-check{opacity:1;}
-.ps-footer{border-top:1px solid var(--hx-border);padding:9px 18px;display:flex;align-items:center;justify-content:space-between;}
-.ps-reset{font-size:10px;font-weight:600;color:var(--hx-text3);cursor:pointer;transition:color .15s;}
-.ps-reset:hover{color:var(--hx-navy);}
-.ps-view-ind{font-size:10px;color:var(--hx-text3);}
-.ps-view-ind strong{color:var(--merkury-teal);}
+/* Persona switcher removed */
 
 /* ── RESPONSIVE ──────────────────────────────────────── */
 @media(max-width:1024px){
@@ -557,7 +526,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
       <div class="idp-title">Real-Time Identity Sample</div>
       <span class="idp-close" onclick="closeIdPanel()">&#215;</span>
     </div>
-    <div class="idp-sub">Merkury B2B Connect — Schema A (Account-Level)</div>
+    <div class="idp-sub" id="idp-sub-text">Merkury B2B Connect — Schema A</div>
   </div>
   <div class="idp-body" id="idp-body">
     <div class="idp-empty">Select a persona to see live Merkury tag data.</div>
@@ -1019,24 +988,12 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
   </div>
 </div><!-- /view-3 -->
 
-<!-- PERSONA SWITCHER -->
-<div id="persona-switcher">
-  <div id="ps-toggle" onclick="toggleSwitcher()">
-    <div class="ps-dot"></div>
-    <span>Demo Persona</span>
-    <span class="ps-chevron">&#9662;</span>
-  </div>
-  <div id="ps-panel">
-    <div class="ps-hdr">
-      <div class="ps-hdr-left"><h3>Merkury Demo Switcher</h3><p>HelixHealth · Adobe Summit 2026</p></div>
-      <span class="ps-badge">Live</span>
-    </div>
-    <div class="ps-active-bar"><div class="ps-active-dot"></div>Active: <strong id="ps-active-name">Default</strong></div>
+Active: <strong id="ps-active-name">Default</strong></div>
     <div class="ps-section-label">Select Persona / View</div>
     <div class="ps-persona-list" id="ps-persona-list"></div>
     <div class="ps-footer">
       <span class="ps-reset" onclick="resetDemo()">↺ Reset demo</span>
-      <span class="ps-view-ind">View: <strong id="ps-view-name">Home</strong></span>
+      
     </div>
   </div>
 </div>
@@ -1089,14 +1046,9 @@ var MERKURY_PAYLOADS = {
   },response:'match',version:'1.0.0'}}
 };
 
-var PERSONAS=[
-  {key:'default',       name:'Anonymous Visitor', title:'No identity — prospect browsing',             avatar:'👤',bg:'#f4f7fa'},
-  {key:'medlink',       name:'MedLink Dist. Co.', title:'Prospect — Account-level only · Nashville, TN',avatar:'🏭',bg:'#e6f4f8'},
-  {key:'sarah_tillman', name:'Sarah Tillman',     title:'Demand Gen Manager — HelixHealth (internal)', avatar:'📊',bg:'#edf8f0'}
-];
 
 // ══ STATE ════════════════════════════════════════
-var activePersonaKey='default', activeView=1, panelOpen=false, idPanelOpen=false;
+var activePersonaKey='default', activeView=1, idPanelOpen=false;
 var resolveAnimDone=false, sessionId=Math.random().toString(36).substr(2,9).toUpperCase();
 window._svq=window._svq||[]; window._merkuryPersona='default';
 
@@ -1133,17 +1085,33 @@ function merkuryResolve(personaKey){
 }
 
 // ══ IDENTITY SAMPLE PANEL ═══════════════════════
-function toggleIdPanel(){
-  idPanelOpen=!idPanelOpen;
-  document.getElementById('id-panel').classList.toggle('open',idPanelOpen);
+function closeAllPanels(){
+  // Close identity panel
+  idPanelOpen=false;
+  var ip=document.getElementById('id-panel');if(ip)ip.classList.remove('open');
 }
-function closeIdPanel(){idPanelOpen=false;document.getElementById('id-panel').classList.remove('open');}
+function toggleIdPanel(){
+  var willOpen=!idPanelOpen;
+  closeAllPanels();
+  if(willOpen){
+    idPanelOpen=true;
+    var ip=document.getElementById('id-panel');if(ip)ip.classList.add('open');
+  }
+}
+function closeIdPanel(){closeAllPanels();}
 
 function updateIdPanel(key){
   var body=document.getElementById('idp-body');
   var resolveBar=document.getElementById('idp-resolve-bar');
   var resolveMs=document.getElementById('idp-resolve-ms');
   if(!body)return;
+  // Update panel subtitle based on persona
+  var subEl=document.getElementById('idp-sub-text');
+  if(subEl){
+    if(key==='medlink')subEl.textContent='MedLink Distribution Co. — Account-level · No individual identity resolved';
+    else if(key==='sarah_tillman')subEl.textContent='Sarah Tillman — HelixHealth Internal · Demand Gen Manager view';
+    else subEl.textContent='Merkury B2B Connect — Schema A';
+  }
   var payload=MERKURY_PAYLOADS[key];
   var d=(payload&&payload.d.response==='match')?payload.d.data:null;
   if(!d){
@@ -1372,27 +1340,6 @@ function animateAEP(personaKey){
   resolveAnimDone=true;
 }
 
-// ══ PERSONA SWITCHER ════════════════════════════
-function buildPersonaList(){
-  var list=document.getElementById('ps-persona-list');if(!list)return;list.innerHTML='';
-  PERSONAS.forEach(function(p){
-    var el=document.createElement('div');el.className='ps-persona'+(p.key===activePersonaKey?' active':'');el.setAttribute('data-key',p.key);
-    el.innerHTML='<div class="ps-avatar" style="background:'+p.bg+'">'+p.avatar+'</div><div class="ps-info"><div class="ps-name">'+p.name+'</div><div class="ps-title">'+p.title+'</div></div><span class="ps-check">✓</span>';
-    el.addEventListener('click',function(){applyPersona(p.key);});
-    list.appendChild(el);
-  });
-}
-function toggleSwitcher(){panelOpen=!panelOpen;document.getElementById('ps-panel').classList.toggle('open',panelOpen);document.getElementById('ps-toggle').classList.toggle('open',panelOpen);updateViewIndicator();}
-document.addEventListener('click',function(e){if(!e.target.closest('#persona-switcher')){panelOpen=false;var p=document.getElementById('ps-panel'),t=document.getElementById('ps-toggle');if(p)p.classList.remove('open');if(t)t.classList.remove('open');}});
-function updateViewIndicator(){var labels={1:'Home — Tag Fires',2:'AEP Profile',3:'Journey Triggered'};var el=document.getElementById('ps-view-name');if(el)el.textContent=labels[activeView]||activeView;}
-function applyPersona(key){
-  activePersonaKey=key;
-  document.querySelectorAll('.ps-persona').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-key')===key);});
-  var p=PERSONAS.find(function(x){return x.key===key;})||PERSONAS[0];
-  var n=document.getElementById('ps-active-name');if(n)n.textContent=p.name;
-  window._merkuryPersona=key;merkuryResolve(key);
-  setTimeout(function(){panelOpen=false;var p2=document.getElementById('ps-panel'),t=document.getElementById('ps-toggle');if(p2)p2.classList.remove('open');if(t)t.classList.remove('open');},300);
-}
 function resetDemo(){
   activePersonaKey='default';resolveAnimDone=false;sessionId=Math.random().toString(36).substr(2,9).toUpperCase();
   var scoreEl=document.getElementById('aep-score-num'),barEl=document.getElementById('aep-score-bar'),threshEl=document.getElementById('aep-threshold-txt');
@@ -1405,7 +1352,6 @@ function resetDemo(){
   if(idEl){idEl.textContent='dentsu.id: resolving...';idEl.style.color='';}
   buildPersonaList();goToView(1);merkuryResolve('default');
   var n=document.getElementById('ps-active-name');if(n)n.textContent='Default';
-  panelOpen=false;var p=document.getElementById('ps-panel'),t=document.getElementById('ps-toggle');if(p)p.classList.remove('open');if(t)t.classList.remove('open');
   updateIdPanel('default');
 }
 
@@ -1427,7 +1373,6 @@ function submitHxForm(){
 
 // ══ INIT ════════════════════════════════════════
 document.addEventListener('DOMContentLoaded',function(){
-  buildPersonaList();updateViewIndicator();
   setTimeout(function(){merkuryResolve('default');},120);
 });
 </script>
