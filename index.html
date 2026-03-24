@@ -997,12 +997,6 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
 </div><!-- /view-3 -->
 
 Active: <strong id="ps-active-name">Default</strong></div>
-    <div class="ps-section-label">Select Persona / View</div>
-    <div class="ps-persona-list" id="ps-persona-list"></div>
-    <div class="ps-footer">
-      <span class="ps-reset" onclick="resetDemo()">↺ Reset demo</span>
-      
-    </div>
   </div>
 </div>
 
@@ -1364,8 +1358,7 @@ function resetDemo(){
   if(fEl)fEl.innerHTML='';if(vcEl)vcEl.textContent='—';if(piEl)piEl.textContent='—';if(plEl)plEl.innerHTML='';
   if(nsEl)nsEl.style.display='none';if(btnEl)btnEl.disabled=true;
   if(idEl){idEl.textContent='dentsu.id: resolving...';idEl.style.color='';}
-  buildPersonaList();goToView(1);merkuryResolve('default');
-  var n=document.getElementById('ps-active-name');if(n)n.textContent='Default';
+  goToView(1);merkuryResolve('default');
   updateIdPanel('default');
 }
 
