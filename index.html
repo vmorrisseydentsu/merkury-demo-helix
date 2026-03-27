@@ -36,6 +36,7 @@ window._svq.push(['_trackPageView']);
   --merkury-teal:#00c2b8;
   --merkury-navy:#0f1e32;
   --aep-blue:   #1473e6;
+  --adobe-red:  #FA0F00;
   --ajo-purple: #6e4eda;
   --mk-orange:  #f76a1a;
   --font:'DM Sans',-apple-system,sans-serif;
@@ -324,7 +325,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
 /* AEP Panel */
 .aep-panel{display:flex;flex-direction:column;height:100%;}
 .aep-header{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px;background:#0a1825;}
-.aep-logo-mark{width:22px;height:22px;background:var(--aep-blue);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0;}
+.aep-logo-mark{width:22px;height:22px;background:var(--adobe-red);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0;}
 .aep-logo-name{font-size:12px;font-weight:700;color:rgba(255,255,255,.85);}
 .aep-logo-sub{font-size:9px;color:rgba(255,255,255,.4);}
 .aep-live-badge{margin-left:auto;background:rgba(13,158,110,.2);border:1px solid var(--hx-green);border-radius:4px;padding:2px 7px;font-size:9px;font-weight:700;color:var(--hx-green);letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
@@ -404,7 +405,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
 .ajo-enr-label2{font-size:10px;color:rgba(255,255,255,.4);}
 .ajo-enr-badge{background:rgba(13,158,110,.2);border:1px solid rgba(13,158,110,.35);border-radius:3px;padding:2px 7px;font-size:9px;font-weight:700;color:#2dd4a0;}
 .mk-header{padding:14px 22px;border-bottom:1px solid var(--hx-border);display:flex;align-items:center;gap:10px;background:#fff;}
-.mk-logo-mark{width:26px;height:26px;background:var(--mk-orange);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0;}
+.mk-logo-mark{width:26px;height:26px;background:var(--adobe-red);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0;}
 .mk-logo-name{font-size:12px;font-weight:700;color:#1a1a1a;}
 .mk-logo-sub{font-size:9px;color:#888;}
 .mk-fired-badge{margin-left:auto;background:#fff5f0;border:1px solid var(--mk-orange);border-radius:4px;padding:2px 8px;font-size:9px;font-weight:700;color:var(--mk-orange);letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:4px;}
@@ -525,6 +526,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
     <div class="idp-header-top">
       <div class="idp-title">Real-Time Identity Sample</div>
       <span class="idp-close" onclick="closeIdPanel()">&#215;</span>
+      <div style="font-size:9px;color:rgba(255,255,255,.3);margin:4px 0 0;text-align:center;padding:0 16px;">Use presenter bar above to switch personas</div>
     </div>
     <div class="idp-sub" id="idp-sub-text">Merkury B2B Connect — Schema A</div>
   </div>
@@ -577,9 +579,14 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
               <p class="hx-form-privacy">By submitting you agree to our Privacy Policy. We never share your data.</p>
             </div>
             <div class="hx-form-success" id="hx-form-success">
-              <div class="hx-form-success-icon">✓</div>
-              <h3>Request received!</h3>
-              <p>A HelixHealth distribution specialist will follow up within one business day.</p>
+              <div class="hx-form-success-icon">&#10003;</div>
+              <h3>Request received &mdash; MedLink Distribution Co.</h3>
+              <p style="margin-bottom:10px;font-size:12px;">Merkury resolved your account before you submitted this form. Your identity was already known from your browsing session.</p>
+              <div style="background:#f0faf9;border:1px solid rgba(10,110,138,.2);border-radius:5px;padding:9px 11px;text-align:left;margin-bottom:10px;">
+                <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hx-teal);margin-bottom:4px;">What happened in the background</div>
+                <div style="font-size:11px;color:var(--hx-text2);line-height:1.6;">Merkury tag fired &#8594; MedLink account resolved &#8594; AJO B2B enrolled account in GPO nurture track &#8594; Marketo follow-up queued for sarah.tillman@helixhealth.com</div>
+              </div>
+              <p style="font-size:11px;color:var(--hx-text3);">A specialist will follow up within one business day.</p>
             </div>
           </div>
         </div>
@@ -853,7 +860,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
       <div class="aep-panel">
         <div class="aep-header">
           <div class="aep-logo-mark" style="background:none;padding:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="24" height="24" rx="4" fill="#1473E6"/>
+  <rect width="24" height="24" rx="4" fill="#FA0F00"/>
   <path d="M12 4.5L19 19H14.5L12 14L9.5 19H5L12 4.5Z" fill="white"/>
   <path d="M10.2 14.5H13.8" stroke="#1473E6" stroke-width="2"/>
 </svg></div>
@@ -941,7 +948,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
     <div class="v3-right">
       <div class="mk-header">
         <div class="mk-logo-mark" style="background:none;padding:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="24" height="24" rx="4" fill="#F76A1A"/>
+  <rect width="24" height="24" rx="4" fill="#FA0F00"/>
   <path d="M12 4.5L19 19H14.5L12 14L9.5 19H5L12 4.5Z" fill="white"/>
   <path d="M10.2 14.5H13.8" stroke="#F76A1A" stroke-width="2"/>
 </svg></div>
@@ -971,7 +978,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
         <div class="mk-sec-title" style="margin-top:16px;">Email 1 — Preview</div>
         <div class="mk-email">
           <div class="mk-email-hdr">
-            <div class="mk-email-from">From: Sarah Tillman, HelixHealth Distribution · sarah.tillman@helixhealth.com</div>
+            <div class="mk-email-from">From: Sarah Tillman, HelixHealth Distribution · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="37445645565f19435e5b5b5a5659775f525b5e4f5f52565b435f1954585a">[email&#160;protected]</a></div>
             <div class="mk-email-subj">HelixCheck Pro pricing for your pharmacy network — let's talk</div>
           </div>
           <div class="mk-email-body">
@@ -1000,7 +1007,7 @@ Active: <strong id="ps-active-name">Default</strong></div>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ══ SAFE CONSOLE SHIM ═══════════════════════════
 (function(){var noop=function(){};var m=['log','warn','error','info','group','groupCollapsed','groupEnd','table','dir'];if(typeof console==='undefined'){window.console={};}m.forEach(function(x){if(typeof console[x]!=='function'){console[x]=noop;}});})();
 
@@ -1378,7 +1385,7 @@ function submitHxForm(){
   document.getElementById('hx-form-success').style.display='block';
 }
 
-// ══ INIT ════════════════════════════════════════
+// ══ INIT ════════
 document.addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){merkuryResolve('default');},120);
 });
