@@ -438,10 +438,9 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
     <div class="presenter-bar-right">
       <span class="pbar-persona-label">Story:</span>
       <button class="pbar-btn pbar-btn-anon active" id="pbtn-s1" onclick="demoStep(1)">👤 Step 1 — Anonymous</button>
-      <button class="pbar-btn pbar-btn-prospect" id="pbtn-s2" onclick="demoStep(2)">🔍 Step 2 — Tag fires</button>
-      <button class="pbar-btn pbar-btn-prospect" id="pbtn-s3" onclick="demoStep(3)">📈 Step 3 — Threshold crossed</button>
-      <button class="pbar-btn pbar-btn-prospect" id="pbtn-s4" onclick="demoStep(4)">⚡ Step 4 — AJO + Marketo</button>
-      <button class="pbar-btn pbar-btn-auth" id="pbtn-sarah" onclick="demoStep(5)">📊 Sarah's View</button>
+      <button class="pbar-btn pbar-btn-prospect" id="pbtn-s2" onclick="demoStep(2)">📈 Step 2 — Merkury resolves</button>
+      <button class="pbar-btn pbar-btn-prospect" id="pbtn-s3" onclick="demoStep(3)">⚡ Step 3 — AJO + Marketo</button>
+      <button class="pbar-btn pbar-btn-auth" id="pbtn-sarah" onclick="demoStep(4)">📊 Sarah's View</button>
     </div>
   </div>
 </div>
@@ -941,8 +940,8 @@ function idpSwitchPersona(key){
   var map={'default':'idp-ps-anon','medlink':'idp-ps-prospect','sarah_tillman':'idp-ps-internal'};
   var btn=document.getElementById(map[key]);if(btn)btn.classList.add('active');
   if(key==='default'){demoStep(1);}
-  else if(key==='medlink'){demoStep(3);}
-  else if(key==='sarah_tillman'){demoStep(5);}
+  else if(key==='medlink'){demoStep(2);}
+  else if(key==='sarah_tillman'){demoStep(4);}
 }
 function toggleIdPanel(){
   var willOpen=!idPanelOpen;
@@ -1053,8 +1052,8 @@ var _currentStep=1;
 
 function demoStep(n){
   _currentStep=n;
-  [1,2,3,4].forEach(function(i){var b=document.getElementById('pbtn-s'+i);if(b)b.classList.toggle('active',i===n);});
-  var bs=document.getElementById('pbtn-sarah');if(bs)bs.classList.toggle('active',n===5);
+  [1,2,3].forEach(function(i){var b=document.getElementById('pbtn-s'+i);if(b)b.classList.toggle('active',i===n);});
+  var bs=document.getElementById('pbtn-sarah');if(bs)bs.classList.toggle('active',n===4);
 
   var banner=document.getElementById('step-banner');
   var bannerNum=document.getElementById('step-banner-num');
@@ -1062,11 +1061,10 @@ function demoStep(n){
   var bannerNext=document.getElementById('step-banner-next');
 
   var steps={
-    1:{num:'Step 1 of 5',text:'Anonymous visitor — MedLink has visited 7 times in 14 days. HelixHealth has no idea who they are. No CRM record. No outreach. Invisible.',next:'Click Step 2 to fire the Merkury tag'},
-    2:{num:'Step 2 of 5',text:'Merkury sv.js tag fires on page load. The identity graph starts matching session signals against 260M+ B2B profiles. AEP profile begins building — watch the score.',next:'Click Step 3 when score reaches threshold'},
-    3:{num:'Step 3 of 5',text:'Intent score crosses 80. Account resolved: MedLink Distribution Co., Nashville TN, $480M revenue. Personalized experience surfaces — no form fill, no login required.',next:'Click Step 4 to see AJO + Marketo fire'},
-    4:{num:'Step 4 of 5',text:'AJO B2B detects the threshold crossing and enrolls MedLink in the distributor nurture journey. Marketo fires Email 1 of 3 automatically — all before anyone at MedLink raised their hand.',next:"Click Sarah's View to see the internal perspective"},
-    5:{num:'Step 5 of 5',text:'Sarah Tillman, Demand Gen Manager at HelixHealth. This is what the outbound team sees: account resolved, journey active, Marketo queued. The deal started before sales knew it.',next:''}
+    1:{num:'Step 1 of 4',text:'Anonymous visitor — MedLink has visited 7 times in 14 days. HelixHealth has no idea who they are. No CRM record. No outreach. Invisible.',next:'Click Step 2 to resolve identity'},
+    2:{num:'Step 2 of 4',text:'Merkury resolves MedLink Distribution Co. from anonymous signal — no form fill, no login. Intent score crosses 80. Watch the AEP profile build in real time.',next:'Click Step 3 to see AJO + Marketo fire'},
+    3:{num:'Step 3 of 4',text:'AJO B2B detects the threshold crossing and enrolls MedLink in the distributor nurture journey. Marketo fires Email 1 of 3 automatically — all before anyone at MedLink raised their hand.',next:"Click Sarah's View to see the internal perspective"},
+    4:{num:'Step 4 of 4',text:"Sarah Tillman, Demand Gen Manager at HelixHealth. This is what the outbound team sees: account resolved, journey active, Marketo queued. The deal started before sales knew it.",next:''}
   };
 
   var s=steps[n];if(!s)return;
@@ -1076,10 +1074,9 @@ function demoStep(n){
   if(bannerNext)bannerNext.innerHTML=s.next?'<span style="font-size:11px;color:var(--hx-teal-l);">'+s.next+'</span>':'';
 
   if(n===1){applyPersona('default');goToView(1);if(banner)banner.style.display='none';}
-  else if(n===2){resetAEPPanel();applyPersona('medlink');goToView(2);setV2State('before');}
-  else if(n===3){applyPersona('medlink');goToView(2);setV2State('after');setTimeout(function(){animateAEP('medlink');},200);}
-  else if(n===4){applyPersona('medlink');goToView(3);}
-  else if(n===5){applyPersonaAndResolve('sarah_tillman');goToView(3);}
+  else if(n===2){resetAEPPanel();applyPersona('medlink');goToView(2);setV2State('after');setTimeout(function(){animateAEP('medlink');},200);}
+  else if(n===3){applyPersona('medlink');goToView(3);}
+  else if(n===4){applyPersonaAndResolve('sarah_tillman');goToView(3);}
 }
 
 function setV2State(state){
