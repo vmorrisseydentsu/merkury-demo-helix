@@ -489,11 +489,22 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
       <span class="pbar-sub">Demo Purposes Only — Adobe Summit 2026 · Merkle Booth</span>
     </div>
     <div class="presenter-bar-right">
-      <span class="pbar-persona-label">Simulate visit as:</span>
-      <button class="pbar-btn pbar-btn-anon" onclick="applyPersona('default');goToView(1);">👤 Step 1 — Anonymous</button>
-      <button class="pbar-btn pbar-btn-prospect" onclick="triggerResolve();">🏭 Step 2–4 — Resolve MedLink</button>
-      <button class="pbar-btn pbar-btn-auth" onclick="applyPersonaAndResolve('sarah_tillman');">📊 Sarah's View — Internal</button>
+      <span class="pbar-persona-label">Story:</span>
+      <button class="pbar-btn pbar-btn-anon active" id="pbtn-s1" onclick="demoStep(1)">👤 Step 1 — Anonymous</button>
+      <button class="pbar-btn pbar-btn-prospect" id="pbtn-s2" onclick="demoStep(2)">🔍 Step 2 — Tag fires</button>
+      <button class="pbar-btn pbar-btn-prospect" id="pbtn-s3" onclick="demoStep(3)">📈 Step 3 — Threshold crossed</button>
+      <button class="pbar-btn pbar-btn-prospect" id="pbtn-s4" onclick="demoStep(4)">⚡ Step 4 — AJO + Marketo</button>
+      <button class="pbar-btn pbar-btn-auth" id="pbtn-sarah" onclick="demoStep(5)">📊 Sarah's View</button>
     </div>
+  </div>
+</div>
+
+<!-- STEP CONTEXT BANNER -->
+<div id="step-banner" style="background:#071e34;border-bottom:1px solid rgba(10,110,138,.25);padding:7px 0;display:none;">
+  <div style="max-width:var(--mw);margin:0 auto;padding:0 var(--g);display:flex;align-items:center;gap:14px;">
+    <div id="step-banner-num" style="background:var(--hx-teal);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:3px;letter-spacing:.5px;flex-shrink:0;"></div>
+    <div id="step-banner-text" style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.5;"></div>
+    <div id="step-banner-next" style="margin-left:auto;flex-shrink:0;"></div>
   </div>
 </div>
 
@@ -543,7 +554,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
     <div class="idp-persona-strip-label">Simulate visit as</div>
     <div class="idp-persona-btns">
       <button class="idp-ps-btn idp-ps-btn-anon active" id="idp-ps-anon" onclick="idpSwitchPersona('default')">👤 Step 1 — Anonymous</button>
-      <button class="idp-ps-btn idp-ps-btn-prospect" id="idp-ps-prospect" onclick="idpSwitchPersona('medlink')">🏭 Step 2–4 — Resolve MedLink</button>
+      <button class="idp-ps-btn idp-ps-btn-prospect" id="idp-ps-prospect" onclick="idpSwitchPersona('medlink')">📈 Steps 2–4 — Resolve MedLink</button>
       <button class="idp-ps-btn idp-ps-btn-internal" id="idp-ps-internal" onclick="idpSwitchPersona('sarah_tillman')">📊 Sarah's View — Internal</button>
     </div>
   </div>
@@ -876,11 +887,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
     <div class="v2-right">
       <div class="aep-panel">
         <div class="aep-header">
-          <div class="aep-logo-mark" style="background:none;padding:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="24" height="24" rx="4" fill="#FA0F00"/>
-  <path d="M12 4.5L19 19H14.5L12 14L9.5 19H5L12 4.5Z" fill="white"/>
-  <path d="M10.2 14.5H13.8" stroke="#1473E6" stroke-width="2"/>
-</svg></div>
+          <div class="aep-logo-mark" style="background:none;padding:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#FA0F00"/><path d="M12 3.5L20.5 20.5H15.8L14.2 16.8H9.8L8.2 20.5H3.5L12 3.5ZM12 9.5L10.6 13.2H13.4L12 9.5Z" fill="white"/></svg></div>
           <div><div class="aep-logo-name">Adobe Experience Platform</div><div class="aep-logo-sub">Real-Time CDP · B2B Edition</div></div>
           <div class="aep-live-badge"><div class="aep-live-dot"></div>Live</div>
         </div>
@@ -964,11 +971,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
     </div>
     <div class="v3-right">
       <div class="mk-header">
-        <div class="mk-logo-mark" style="background:none;padding:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="24" height="24" rx="4" fill="#FA0F00"/>
-  <path d="M12 4.5L19 19H14.5L12 14L9.5 19H5L12 4.5Z" fill="white"/>
-  <path d="M10.2 14.5H13.8" stroke="#F76A1A" stroke-width="2"/>
-</svg></div>
+        <div class="mk-logo-mark" style="background:none;padding:0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#FA0F00"/><path d="M12 3.5L20.5 20.5H15.8L14.2 16.8H9.8L8.2 20.5H3.5L12 3.5ZM12 9.5L10.6 13.2H13.4L12 9.5Z" fill="white"/></svg></div>
         <div><div class="mk-logo-name">Marketo Engage</div><div class="mk-logo-sub">Smart Campaign · Triggered</div></div>
         <div class="mk-fired-badge"><div class="mk-fired-dot"></div>Program Fired</div>
       </div>
@@ -1135,16 +1138,9 @@ function idpSwitchPersona(key){
   });
 
   // Fire the actual persona change
-  if(key==='default'){
-    applyPersona('default');
-    goToView(1);
-  } else if(key==='medlink'){
-    resetAEPPanel();
-    applyPersona('medlink');
-    setTimeout(function(){goToView(2);animateAEP('medlink');},350);
-  } else if(key==='sarah_tillman'){
-    applyPersonaAndResolve('sarah_tillman');
-  }
+  if(key==='default'){ demoStep(1); }
+  else if(key==='medlink'){ demoStep(3); }
+  else if(key==='sarah_tillman'){ demoStep(5); }
 }
 function toggleIdPanel(){
   var willOpen=!idPanelOpen;
@@ -1266,6 +1262,61 @@ function triggerResolve(){
   resetAEPPanel();
   applyPersona('medlink');
   setTimeout(function(){goToView(2);animateAEP('medlink');},350);
+}
+
+var _currentStep = 1;
+
+function demoStep(n){
+  _currentStep = n;
+  // Update presenter bar active state
+  [1,2,3,4,5].forEach(function(i){
+    var btn = document.getElementById('pbtn-s'+i) || document.getElementById('pbtn-sarah');
+    if(i===5){ var b2=document.getElementById('pbtn-sarah'); if(b2)b2.classList.toggle('active',n===5); return; }
+    var b = document.getElementById('pbtn-s'+i);
+    if(b) b.classList.toggle('active', i===n);
+  });
+
+  var banner = document.getElementById('step-banner');
+  var bannerNum = document.getElementById('step-banner-num');
+  var bannerText = document.getElementById('step-banner-text');
+  var bannerNext = document.getElementById('step-banner-next');
+
+  var steps = {
+    1: { num:'Step 1 of 5', text:'Anonymous visitor — MedLink has visited 7 times in 14 days. HelixHealth has no idea who they are. No CRM record. No outreach. Invisible.', next:'→ Click Step 2 to fire the Merkury tag', view:1, persona:'default', aep:false },
+    2: { num:'Step 2 of 5', text:'Merkury sv.js tag fires on page load. The identity graph starts matching session signals against 260M+ B2B profiles. AEP profile begins building — watch the score.', next:'→ Click Step 3 when score reaches threshold', view:2, persona:'medlink', aep:'start', beforeAfter:'before' },
+    3: { num:'Step 3 of 5', text:'Intent score crosses 80. Account resolved: MedLink Distribution Co., Nashville TN, $480M revenue. Personalized experience surfaces — no form fill, no login required.', next:'→ Click Step 4 to see AJO + Marketo fire', view:2, persona:'medlink', aep:'full', beforeAfter:'after' },
+    4: { num:'Step 4 of 5', text:'AJO B2B detects the threshold crossing and enrolls MedLink in the distributor nurture journey. Marketo fires Email 1 of 3 automatically — all before anyone at MedLink raised their hand.', next:'\u2192 Click Sarah\u2019s View to see the internal perspective', view:3, persona:'medlink', aep:false },
+    5: { num:'Step 5 of 5', text:'Sarah Tillman \u2014 Demand Gen Manager at HelixHealth. This is what the outbound team sees: account resolved, journey active, Marketo queued. The deal started before sales knew it.', next:'', view:3, persona:'sarah_tillman', aep:false }
+  };
+
+  var s = steps[n];
+  if(!s) return;
+
+  if(banner){ banner.style.display='block'; }
+  if(bannerNum) bannerNum.textContent = s.num;
+  if(bannerText) bannerText.textContent = s.text;
+  if(bannerNext) bannerNext.innerHTML = s.next ? '<span style="font-size:11px;color:var(--hx-teal-l);">'+s.next+'</span>' : '';
+
+  if(n===1){
+    applyPersona('default');
+    goToView(1);
+  } else if(n===2){
+    resetAEPPanel();
+    applyPersona('medlink');
+    goToView(2);
+    setV2State('before');
+  } else if(n===3){
+    applyPersona('medlink');
+    goToView(2);
+    setV2State('after');
+    setTimeout(function(){ animateAEP('medlink'); }, 200);
+  } else if(n===4){
+    applyPersona('medlink');
+    goToView(3);
+  } else if(n===5){
+    applyPersonaAndResolve('sarah_tillman');
+    goToView(3);
+  }
 }
 
 function setV2State(state){
