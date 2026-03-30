@@ -554,7 +554,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
     <div class="idp-persona-strip-label">Simulate visit as</div>
     <div class="idp-persona-btns">
       <button class="idp-ps-btn idp-ps-btn-anon active" id="idp-ps-anon" onclick="idpSwitchPersona('default')">👤 Step 1 — Anonymous</button>
-      <button class="idp-ps-btn idp-ps-btn-prospect" id="idp-ps-prospect" onclick="idpSwitchPersona('medlink')">📈 Steps 2–4 — Resolve MedLink</button>
+      <button class="idp-ps-btn idp-ps-btn-prospect" id="idp-ps-prospect" onclick="idpSwitchPersona('medlink')">🏭 Step 2 — Resolve MedLink</button>
       <button class="idp-ps-btn idp-ps-btn-internal" id="idp-ps-internal" onclick="idpSwitchPersona('sarah_tillman')">📊 Sarah's View — Internal</button>
     </div>
   </div>
@@ -579,47 +579,11 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
           <h1 class="hx-hero-h1">Rapid diagnostics built for the demands of modern healthcare distribution</h1>
           <p class="hx-hero-sub">HelixCheck test kits deliver clinical-grade accuracy across pharmacy networks, GPOs and health system distribution partners — at the scale and speed your network demands.</p>
           <div class="hx-hero-btns">
-            <button class="btn-hero-primary" onclick="document.getElementById('contact-form-section').scrollIntoView({behavior:'smooth'})">Request Network Pricing</button>
+            <button class="btn-hero-primary" onclick="return false;">Explore Products</button>
             <button class="btn-hero-outline" onclick="return false;">View Clinical Evidence →</button>
           </div>
         </div>
-        <div id="contact-form-section">
-          <div class="hx-form-card">
-            <div id="hx-form-fields">
-              <div class="hx-form-title">Talk to a Distribution Specialist</div>
-              <div class="hx-form-sub">GPO & network pricing available. Response within 1 business day.</div>
-              <div class="hx-f2">
-                <div class="hx-fg"><label>First Name *</label><input type="text" id="hf-fname" placeholder="Jane"></div>
-                <div class="hx-fg"><label>Last Name *</label><input type="text" id="hf-lname" placeholder="Smith"></div>
-              </div>
-              <div class="hx-fg"><label>Business Email *</label><input type="email" id="hf-email" placeholder="jane@organization.com"></div>
-              <div class="hx-fg"><label>Organization *</label><input type="text" id="hf-org" placeholder="Distribution company or health system"></div>
-              <div class="hx-fg"><label>Product Interest</label>
-                <select id="hf-product">
-                  <option value="">Select a product...</option>
-                  <option>HelixCheck Pro — Respiratory Panel</option>
-                  <option>HelixCheck Rapid — Flu A/B + COVID</option>
-                  <option>HelixCheck Combo — 10-panel STI</option>
-                  <option>Full Portfolio Evaluation</option>
-                </select>
-              </div>
-              <button class="hx-form-submit" onclick="submitHxForm()">Submit Request →</button>
-              <p class="hx-form-privacy">By submitting you agree to our Privacy Policy. We never share your data.</p>
-            </div>
-            <div class="hx-form-success" id="hx-form-success">
-              <div class="hx-form-success-icon">&#10003;</div>
-              <h3>Request received &mdash; MedLink Distribution Co.</h3>
-              <p style="margin-bottom:10px;font-size:12px;">Merkury resolved your account before you submitted this form. Your identity was already known from your browsing session.</p>
-              <div style="background:#f0faf9;border:1px solid rgba(10,110,138,.2);border-radius:5px;padding:9px 11px;text-align:left;margin-bottom:10px;">
-                <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hx-teal);margin-bottom:4px;">What happened in the background</div>
-                <div style="font-size:11px;color:var(--hx-text2);line-height:1.6;">Merkury tag fired &#8594; MedLink account resolved &#8594; AJO B2B enrolled account in GPO nurture track &#8594; Marketo follow-up queued for sarah.tillman@helixhealth.com</div>
-              </div>
-              <p style="font-size:11px;color:var(--hx-text3);">A specialist will follow up within one business day.</p>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
     <div class="hx-hero-sliver"></div>
   </div>
 
@@ -786,7 +750,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
           <p class="hx-cta-p">Connect with a HelixHealth distribution specialist. We typically respond within one business day.</p>
         </div>
         <div class="hx-cta-btns">
-          <button class="btn-cta-white" onclick="document.getElementById('contact-form-section').scrollIntoView({behavior:'smooth'})">Request Pricing</button>
+          <button class="btn-cta-white" onclick="return false;">Request Pricing</button>
           <button class="btn-cta-outline" onclick="return false;">Call Sales: 800-435-4985</button>
         </div>
       </div>
@@ -803,7 +767,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
         <div class="fc"><h4>Products</h4><a>HelixCheck Pro</a><a>HelixCheck Rapid</a><a>HelixCheck Combo</a><a>All Products</a></div>
         <div class="fc"><h4>Distribution</h4><a>GPO Partners</a><a>Pharmacy Networks</a><a>Health Systems</a><a>Urgent Care</a></div>
         <div class="fc"><h4>Company</h4><a>About Us</a><a>Clinical Affairs</a><a>Newsroom</a><a>Careers</a></div>
-        <div class="fc"><h4>Support</h4><a onclick="document.getElementById('contact-form-section').scrollIntoView({behavior:'smooth'})">Contact Us</a><a>Partner Portal</a><a>Documentation</a><a>Legal</a></div>
+        <div class="fc"><h4>Support</h4><a onclick="return false;">Contact Us</a><a>Partner Portal</a><a>Documentation</a><a>Legal</a></div>
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 HelixHealth Inc. All Rights Reserved.</span>
@@ -1014,9 +978,7 @@ footer{background:#071624;color:rgba(255,255,255,.55);padding:48px 0 0;}
             <span class="mk-merkury-pill"><span>visits:</span> 7</span>
           </div>
         </div>
-        <div class="mk-loop-close">
-          <div class="mk-loop-label">The loop closes — no form fill required</div>
-          <div class="mk-loop-txt">Merkury identified MedLink at the account level from anonymous signal. AJO B2B detected the intent threshold crossing and enrolled the account. Marketo fired a personalized outreach — all before anyone at MedLink submitted a form or logged in.</div>
+        
         </div>
       </div>
     </div>
@@ -1032,7 +994,7 @@ Active: <strong id="ps-active-name">Default</strong></div>
 (function(){var noop=function(){};var m=['log','warn','error','info','group','groupCollapsed','groupEnd','table','dir'];if(typeof console==='undefined'){window.console={};}m.forEach(function(x){if(typeof console[x]!=='function'){console[x]=noop;}});})();
 
 // ══ LINK INTERCEPTOR ════════════════════════════
-document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h||h==='#'||h===''||h.startsWith('javascript')){var oc=a.getAttribute('onclick')||'';if(oc.indexOf('goToView')!==-1||oc.indexOf('triggerResolve')!==-1||oc.indexOf('scrollIntoView')!==-1){return;}e.preventDefault();return false;}},true);
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href');if(!h||h==='#'||h===''||h.startsWith('javascript')){var oc=a.getAttribute('onclick')||'';if(oc.indexOf('goToView')!==-1||oc.indexOf('triggerResolve')!==-1){return;}e.preventDefault();return false;}},true);
 
 // ══ MERKURY PAYLOADS ════════════════════════════
 var MERKURY_PAYLOADS = {
@@ -1188,7 +1150,7 @@ function updateIdPanel(key){
   function rowObf(lbl,val,len){
     var obf=obfuscate(val,len);
     if(obf===null)return row(lbl,null);
-    return '<div class="idp-signal"><span class="idp-key">'+lbl+'</span><span class="idp-colon">:</span><span class="idp-val-str">\''+obf+'\'</span><span class="idp-obf">obfuscated</span></div>';
+    return '<div class="idp-signal"><span class="idp-key">'+lbl+'</span><span class="idp-colon">:</span><span class="idp-val-str">\''+obf+'\'</span></div>';
   }
   var idSection='<div class="idp-card"><div class="idp-card-title">Identity Resolution</div>'+
     rowObf('dentsu.id',d['dentsu.id'],32)+
